@@ -3,24 +3,29 @@ import React, { FunctionComponent, ReactNode } from 'react'
 import { StyleProp, TextStyle } from 'react-native'
 import styled from "styled-components/native"
 // styling --------------------------------------------------
-import { colors } from "../../../../assets"
+import { textColors } from "../../../../assets"
 
 
 const SubTextStyle = styled.Text`
     font-size: 13px;
-    color: ${colors.gray};
+    color: ${textColors.subText};
     text-align: left;
     font-family: Lato-Regular;
 `
 export interface SubTextProps {
     textStyles?: StyleProp<TextStyle>;
-    children: ReactNode
+    children: ReactNode;
+    onPress?: (() => void) | ((e: any) => void);
 }
 
 const SubText: FunctionComponent<SubTextProps> = (props: SubTextProps) => {
-    const { textStyles, children } = props
+    const { 
+        textStyles, 
+        children, 
+        onPress = () => console.log("I've been clicked!"),
+    } = props
 
-    return <SubTextStyle style={textStyles} >{children}</SubTextStyle>
+    return <SubTextStyle style={textStyles} onPress={onPress} >{children}</SubTextStyle>
 }
 
 export default SubText

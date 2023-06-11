@@ -10,9 +10,8 @@ import { HeaderOne, BodyText, SubText } from "../../components/ui/text";
 // colors
 import { colors } from "../../assets";
 
-const JournalContainer = styled(Container)`
+const SettingsContainer = styled(Container)`
     background-color: ${colors.generalColors.primary};
-    /* justify-content: space-between; */
     width: 100%;
     height: 100%;
     padding-left: 20px;
@@ -22,17 +21,17 @@ const JournalContainer = styled(Container)`
 `;
 
 
-const Journal: FunctionComponent = () => {
+const Settings: FunctionComponent = () => {
     return (
         <>
             <StatusBar style="light" />
-            <JournalContainer>
-                <HeaderOne textStyles={{alignSelf: 'flex-start',}} >
-                    Journal Screen!
+            <SettingsContainer>
+                <HeaderOne>
+                    Settings Screen!
                 </HeaderOne>
-            </JournalContainer>
+            </SettingsContainer>
         </>
     )
 }
 
-export default Journal
+export default Settings

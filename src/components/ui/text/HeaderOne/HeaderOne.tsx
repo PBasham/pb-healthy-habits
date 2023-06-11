@@ -15,12 +15,17 @@ const HeaderOneStyle = styled.Text`
 export interface HeaderOneProps {
     textStyles?: StyleProp<TextStyle>;
     children: ReactNode
+    onPress?: (() => void) | ((e: any) => void)
 }
 
 const HeaderOne: FunctionComponent<HeaderOneProps> = (props: HeaderOneProps) => {
-    const { textStyles, children } = props
+    const {
+        textStyles,
+        children,
+        onPress = () => console.log("I've been clicked!")
+    } = props
 
-    return <HeaderOneStyle style={textStyles} >{children}</HeaderOneStyle>
+    return <HeaderOneStyle style={textStyles} onPress={onPress} >{children}</HeaderOneStyle>
 }
 
 export default HeaderOne

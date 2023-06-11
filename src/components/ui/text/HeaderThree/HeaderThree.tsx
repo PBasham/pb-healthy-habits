@@ -15,12 +15,17 @@ const HeaderThreeStyle = styled.Text`
 export interface HeaderThreeProps {
     textStyles?: StyleProp<TextStyle>;
     children: ReactNode
+    onPress?: (() => void) | ((e: any) => void)
 }
 
 const HeaderThree: FunctionComponent<HeaderThreeProps> = (props: HeaderThreeProps) => {
-    const { textStyles, children } = props
+    const {
+        textStyles,
+        children,
+        onPress = () => console.log("I've been clicked!")
+    } = props
 
-    return <HeaderThreeStyle style={textStyles} >{children}</HeaderThreeStyle>
+    return <HeaderThreeStyle style={textStyles} onPress={onPress} >{children}</HeaderThreeStyle>
 }
 
 export default HeaderThree
