@@ -2,8 +2,11 @@
 import { StyleSheet, Text, View } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import AppLoading from "expo-app-loading"
+
 // components --------------------------------------------------
+// screens
 import { Journal } from "./src/screens";
+import { Settings } from "./src/screens"
 // misc --------------------------------------------------
 // fonts
 import { useFonts } from "expo-font"
@@ -22,5 +25,6 @@ export default function App() {
     
     return (
         <Journal />
+        // <Settings />
     );
 }
