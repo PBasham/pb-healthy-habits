@@ -64,7 +64,7 @@ export default function App() {
                     tabBarStyle: {
                         padding: 10,
                         height: 80,
-                        backgroundColor: generalColors.light,
+                        backgroundColor: tabBarColors.background,
                     }
                 })
                 }

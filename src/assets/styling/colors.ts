@@ -5,7 +5,8 @@ export const generalColors = {
     dark_transparent: "rgba(0,0,0,.5)",
     light_transparent: "rgba(255,255,255,.4)",
 
-    primary: "#C9F1EA",
+    primary: "#eafffe",
+    // primary: "#C9F1EA",
     secondary: "#85c6d8",
 
     borders: "#D9D9D9",
@@ -29,6 +30,6 @@ export const textColors = {
 export const tabBarColors = {
     bar: "#FFF",
     background: "#fff",
-    iconActive: "#333",
+    iconActive: "#61aca7",
     iconInactive: "#bbb",
 }
