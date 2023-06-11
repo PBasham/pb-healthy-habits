@@ -9,10 +9,9 @@ import { HeaderOne, BodyText } from "../../components/ui/text";
 // misc --------------------------------------------------
 // colors
 import { colors } from "../../assets";
-import { Header } from "react-native/Libraries/NewAppScreen";
 
 const JournalContainer = styled(Container)`
-    background-color: ${colors.secondary};
+    background-color: ${colors.generalColors.primary};
     justify-content: space-between;
     width: 100%;
     height: 100%;

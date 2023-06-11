@@ -1,1 +1,2 @@
-export { colors } from "./styling"
+// colors
+export * from "./styling"

@@ -3,12 +3,12 @@ import React, { FunctionComponent, ReactNode } from 'react'
 import { StyleProp, TextStyle } from 'react-native'
 import styled from "styled-components/native"
 // styling --------------------------------------------------
-import { colors } from "../../../../assets"
+import { textColors } from "../../../../assets"
 
 
 const BodyTextStyle = styled.Text`
     font-size: 16px;
-    color: ${colors.gray};
+    color: ${textColors.body};
     text-align: left;
     font-family: Lato-Regular;
 `

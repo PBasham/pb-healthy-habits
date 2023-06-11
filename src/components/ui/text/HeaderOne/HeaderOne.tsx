@@ -3,12 +3,12 @@ import React, { FunctionComponent, ReactNode } from 'react'
 import { StyleProp, TextStyle } from 'react-native'
 import styled from "styled-components/native"
 // styling --------------------------------------------------
-import { colors } from "../../../../assets"
+import { textColors } from "../../../../assets"
 
 
 const HeaderOneStyle = styled.Text`
     font-size: 37px;
-    color: ${colors.gray};
+    color: ${textColors.header_One};
     text-align: left;
     font-family: Lato-Bold;
 `
