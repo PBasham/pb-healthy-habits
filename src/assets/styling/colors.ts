@@ -25,3 +25,10 @@ export const textColors = {
     body: "#000",
     subText: "#DDD",
 }
+
+export const tabBarColors = {
+    bar: "#FFF",
+    background: "#fff",
+    iconActive: "#333",
+    iconInactive: "#bbb",
+}

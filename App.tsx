@@ -13,7 +13,7 @@ import { Settings } from "./src/screens"
 // misc --------------------------------------------------
 // fonts
 import { useFonts } from "expo-font"
-import { generalColors } from "./src/assets";
+import { generalColors, tabBarColors } from "./src/assets";
 
 
 export default function App() {
@@ -36,40 +36,53 @@ export default function App() {
     return (
         <NavigationContainer>
             <Tab.Navigator
+                // tabBar={(props) => <NavBar {...props} />} // todo This would be using my own navbar that I'm passing these screens into.
                 initialRouteName={journalName}
                 screenOptions={({ route }) => ({
+                    headerShown: false,
                     tabBarIcon: ({ focused, color, size }) => {
                         let iconName
                         let routeName = route.name
 
-                        if (routeName === journalName) {
-                            iconName = focused ? "journal" : "journal-outline"
-                        } else if (routeName === settingsName) {
-                            iconName = focused ? "settings" : "settings-outline"
-                        } else {
-                            iconName = focused ? "help" : "help-outline"
-                        }
+                        if (routeName === journalName) iconName = focused ? "journal" : "journal-outline"
+                        else if (routeName === settingsName) iconName = focused ? "settings" : "settings-outline"
+                        else iconName = focused ? "help" : "help-outline"
+
+                        size = 36
+
                         // @ts-ignore
                         return <Ionicons name={iconName} size={size} color={color} />
-
                     },
-                    tabBarActiveTintColor: "tomato",
-                    tabBarInactiveTintColor: "gray",
+                    tabBarActiveTintColor: tabBarColors.iconActive,
+                    tabBarInactiveTintColor: tabBarColors.iconInactive,
                     tabBarLabelStyle: {
                         paddingBottom: 10,
-                        fontSize: 10
+                        fontSize: 16
+                    },
+                    tabBarIconStyle: {
                     },
                     tabBarStyle: {
                         padding: 10,
-                        height: 70,
-                        backgroundColor: generalColors.light
+                        height: 80,
+                        backgroundColor: generalColors.light,
                     }
-                })}
+                })
+                }
 
 
             >
-                <Tab.Screen name={journalName} component={Journal} />
-                <Tab.Screen name={settingsName} component={Settings} />
+                {/* // todo Home_Screen */}
+                <Tab.Screen name={journalName} >
+                    {(props) => <Journal
+
+                    />}
+                </Tab.Screen>
+                {/* // todo EmotionTracker_Screen */}
+                <Tab.Screen name={settingsName} >
+                    {(props) => <Settings
+
+                    />}
+                </Tab.Screen>
 
             </Tab.Navigator>
         </NavigationContainer>

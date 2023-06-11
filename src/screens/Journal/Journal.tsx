@@ -28,7 +28,7 @@ const Journal: FunctionComponent = () => {
             <StatusBar style="light" />
             <JournalContainer>
                 <HeaderOne textStyles={{alignSelf: 'flex-start',}} >
-                    Journal Screen!
+                    Welcome
                 </HeaderOne>
             </JournalContainer>
         </>
