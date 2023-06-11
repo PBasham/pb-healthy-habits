@@ -4,7 +4,7 @@ import styled from "styled-components/native";
 import { StyleSheet, Text } from "react-native";
 // components --------------------------------------------------
 import { Container } from "../../components/shared";
-import { HeaderOne, BodyText } from "../../components/ui/text";
+import { HeaderOne, BodyText, SubText } from "../../components/ui/text";
 
 // misc --------------------------------------------------
 // colors
@@ -12,7 +12,7 @@ import { colors } from "../../assets";
 
 const JournalContainer = styled(Container)`
     background-color: ${colors.generalColors.primary};
-    justify-content: space-between;
+    /* justify-content: space-between; */
     width: 100%;
     height: 100%;
     padding-left: 20px;
@@ -28,8 +28,14 @@ const Journal: FunctionComponent = () => {
             <StatusBar style="light" />
             <JournalContainer>
                 <HeaderOne textStyles={{alignSelf: 'flex-start',}} >
-                    hello
+                    Header One
                 </HeaderOne>
+                <BodyText>
+                    Body text
+                </BodyText>
+                <SubText>
+                    Sub text
+                </SubText>
             </JournalContainer>
         </>
     )

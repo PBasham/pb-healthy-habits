@@ -11,7 +11,7 @@ import { useFonts } from "expo-font"
 
 export default function App() {
     let [fontsLoaded] = useFonts({
-        "Lato-Ragular": require("./src/assets/typography/Lato/Lato-Regular.ttf"),
+        "Lato-Regular": require("./src/assets/typography/Lato/Lato-Regular.ttf"),
         "Lato-Bold": require("./src/assets/typography/Lato/Lato-Bold.ttf"),
         "Lato-Light": require("./src/assets/typography/Lato/Lato-Light.ttf"),
     })
