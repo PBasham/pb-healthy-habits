@@ -7,7 +7,7 @@ import { textColors } from "../../../../assets"
 
 
 const HeaderTwoStyle = styled.Text`
-    font-size: 37px;
+    font-size: 32px;
     color: ${textColors.header_One};
     text-align: left;
     font-family: Lato-Bold;

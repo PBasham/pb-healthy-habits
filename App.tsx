@@ -34,59 +34,59 @@ export default function App() {
     const settingsName = "Settings"
 
     return (
-        <NavigationContainer>
-            <Tab.Navigator
-                // tabBar={(props) => <NavBar {...props} />} // todo This would be using my own navbar that I'm passing these screens into.
-                initialRouteName={journalName}
-                screenOptions={({ route }) => ({
-                    headerShown: false,
-                    tabBarIcon: ({ focused, color, size }) => {
-                        let iconName
-                        let routeName = route.name
+        // <NavigationContainer>
+        //     <Tab.Navigator
+        //         // tabBar={(props) => <NavBar {...props} />} // todo This would be using my own navbar that I'm passing these screens into.
+        //         initialRouteName={journalName}
+        //         screenOptions={({ route }) => ({
+        //             headerShown: false,
+        //             tabBarIcon: ({ focused, color, size }) => {
+        //                 let iconName
+        //                 let routeName = route.name
 
-                        if (routeName === journalName) iconName = focused ? "journal" : "journal-outline"
-                        else if (routeName === settingsName) iconName = focused ? "settings" : "settings-outline"
-                        else iconName = focused ? "help" : "help-outline"
+        //                 if (routeName === journalName) iconName = focused ? "journal" : "journal-outline"
+        //                 else if (routeName === settingsName) iconName = focused ? "settings" : "settings-outline"
+        //                 else iconName = focused ? "help" : "help-outline"
 
-                        size = 36
+        //                 size = 36
 
-                        // @ts-ignore
-                        return <Ionicons name={iconName} size={size} color={color} />
-                    },
-                    tabBarActiveTintColor: tabBarColors.iconActive,
-                    tabBarInactiveTintColor: tabBarColors.iconInactive,
-                    tabBarLabelStyle: {
-                        paddingBottom: 10,
-                        fontSize: 16
-                    },
-                    tabBarIconStyle: {
-                    },
-                    tabBarStyle: {
-                        padding: 10,
-                        height: 80,
-                        backgroundColor: tabBarColors.background,
-                    }
-                })
-                }
+        //                 // @ts-ignore
+        //                 return <Ionicons name={iconName} size={size} color={color} />
+        //             },
+        //             tabBarActiveTintColor: tabBarColors.iconActive,
+        //             tabBarInactiveTintColor: tabBarColors.iconInactive,
+        //             tabBarLabelStyle: {
+        //                 paddingBottom: 10,
+        //                 fontSize: 16
+        //             },
+        //             tabBarIconStyle: {
+        //             },
+        //             tabBarStyle: {
+        //                 padding: 10,
+        //                 height: 80,
+        //                 backgroundColor: tabBarColors.background,
+        //             }
+        //         })
+        //         }
 
 
-            >
-                {/* // todo Home_Screen */}
-                <Tab.Screen name={journalName} >
-                    {(props) => <Journal
+        //     >
+        //         {/* // todo Home_Screen */}
+        //         <Tab.Screen name={journalName} >
+        //             {(props) => <Journal
 
-                    />}
-                </Tab.Screen>
-                {/* // todo EmotionTracker_Screen */}
-                <Tab.Screen name={settingsName} >
-                    {(props) => <Settings
+        //             />}
+        //         </Tab.Screen>
+        //         {/* // todo EmotionTracker_Screen */}
+        //         <Tab.Screen name={settingsName} >
+        //             {(props) => <Settings
 
-                    />}
-                </Tab.Screen>
+        //             />}
+        //         </Tab.Screen>
 
-            </Tab.Navigator>
-        </NavigationContainer>
-        // <Journal />
+        //     </Tab.Navigator>
+        // </NavigationContainer>
+        <Journal />
         // <Settings />
     );
 }

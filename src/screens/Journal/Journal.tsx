@@ -5,13 +5,14 @@ import { StyleSheet, Text } from "react-native";
 // components --------------------------------------------------
 import { Container } from "../../components/shared";
 import { HeaderOne, BodyText, SubText } from "../../components/ui/text";
+import { TopBar } from "../../components/ui";
 
 // misc --------------------------------------------------
 // colors
-import { colors } from "../../assets";
+import { colors, generalColors, textColors } from "../../assets";
 
 const JournalContainer = styled(Container)`
-    background-color: ${colors.generalColors.primary};
+    background-color: ${colors.generalColors.light};
     /* justify-content: space-between; */
     width: 100%;
     height: 100%;
@@ -23,13 +24,15 @@ const JournalContainer = styled(Container)`
 
 
 const Journal: FunctionComponent = () => {
+
+    // todo 1. Make headerbar that will contain current location, backbutton, and settings/extra buttons
+    
     return (
         <>
-            <StatusBar style="light" />
+            {/* <StatusBar style="dark" /> */}
+            <TopBar />
             <JournalContainer>
-                <HeaderOne textStyles={{alignSelf: 'flex-start',}} >
-                    Welcome
-                </HeaderOne>
+
             </JournalContainer>
         </>
     )
