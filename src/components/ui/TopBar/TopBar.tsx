@@ -30,26 +30,43 @@ const TopBarContainer = styled.View`
 interface TopBarProps {
     /** */
     label?: string
-    
+
     /** */
-    onBackPress?: (() => void) | ((e:any) => void) | (() => any) | ((e:any) => any)
+    onBackPress?: (() => void) | ((e: any) => void) | (() => any) | ((e: any) => any)
     /** */
-    onDotsPress?: (() => void) | ((e:any) => void) | (() => any) | ((e:any) => any)
+    onDotsPress?: (() => void) | ((e: any) => void) | (() => any) | ((e: any) => any)
 }
 
 
-const TopBar: FunctionComponent = () => {
+const TopBar: FunctionComponent<TopBarProps> = (props: TopBarProps) => {
 
     // todo 1. Make headerbar that will contain current location, backbutton, and settings/extra buttons
+    const {
+        label,
+        onBackPress = () => console.log("Back button has been pressed!"),
+        onDotsPress = () => console.log("Dots button has been pressed!"),
+    } = props
 
     return (
         <>
             <StatusBar style="light" />
             <TopBarContainer  >
-                <Ionicons name="chevron-back-outline" size={36} color={textColors.dark_transparent}/>
-                <HeaderThree textStyles={{color: textColors.dark_transparent}}>
-                    
+                <Ionicons
+                    name="chevron-back-outline"
+                    size={36}
+                    color={textColors.dark_transparent}
+                    onPress={onBackPress}
+                />
+                <HeaderThree textStyles={{ color: textColors.dark_transparent }}>
+                    {label}
                 </HeaderThree>
+                <Ionicons
+                    name="ellipsis-vertical"
+                    size={36}
+                    color={textColors.dark_transparent}
+                    onPress={onDotsPress}
+                    style={{marginLeft: "auto"}}
+                />
             </TopBarContainer>
         </>
     )

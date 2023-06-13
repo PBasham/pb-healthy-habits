@@ -30,7 +30,9 @@ const Journal: FunctionComponent = () => {
     return (
         <>
             {/* <StatusBar style="dark" /> */}
-            <TopBar />
+            <TopBar 
+                label="Journal"
+            />
             <JournalContainer>
 
             </JournalContainer>
