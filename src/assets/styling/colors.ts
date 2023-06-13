@@ -32,4 +32,8 @@ export const tabBarColors = {
     background: "#fff",
     iconActive: "#61aca7",
     iconInactive: "#bbb",
+    activeTabBackground: "#EFF",
+    // iconActive: "rgba(0,0,0,.5)",
+    // iconInactive: "rgba(0,0,0,.5)",
+    // background: "#85c6d8",
 }

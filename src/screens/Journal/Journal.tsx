@@ -12,7 +12,7 @@ import { TopBar } from "../../components/ui";
 import { colors, generalColors, textColors } from "../../assets";
 
 const JournalContainer = styled(Container)`
-    background-color: ${colors.generalColors.light};
+    /* background-color: ${colors.generalColors.light}; */
     /* justify-content: space-between; */
     width: 100%;
     height: 100%;

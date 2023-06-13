@@ -8,9 +8,9 @@ import { HeaderOne, BodyText, SubText } from "../../components/ui/text";
 
 // misc --------------------------------------------------
 // colors
-import { colors } from "../../assets";
+import { generalColors } from "../../assets";
 
-const SettingsContainer = styled(Container)`
+const MoodTrackerContainer = styled(Container)`
     width: 100%;
     height: 100%;
     padding-left: 20px;
@@ -20,17 +20,17 @@ const SettingsContainer = styled(Container)`
 `;
 
 
-const Settings: FunctionComponent = () => {
+const MoodTracker: FunctionComponent = () => {
     return (
         <>
             <StatusBar style="light" />
-            <SettingsContainer>
+            <MoodTrackerContainer>
                 <HeaderOne>
-                    Settings Screen!
+                    MoodTracker Screen!
                 </HeaderOne>
-            </SettingsContainer>
+            </MoodTrackerContainer>
         </>
     )
 }
 
-export default Settings
+export default MoodTracker

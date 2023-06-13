@@ -8,8 +8,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import { Ionicons } from '@expo/vector-icons';
 // components --------------------------------------------------
 // screens
-import { Journal } from "./src/screens";
-import { Settings } from "./src/screens"
+import { Journal, Settings, MoodTracker } from "./src/screens";
 // misc --------------------------------------------------
 // fonts
 import { useFonts } from "expo-font"
@@ -30,64 +29,89 @@ export default function App() {
 
     const Tab = createBottomTabNavigator()
 
-    const homeName = "Home"
+    const moodTrackerName = "Mood"
     const journalName = "Journal"
-    const settingsName = "Settings"
+    // const settingsName = "Settings"
+
+    //h LOG
+    //+ Mood Tracking page
+    //~ commented out Settings page from tab bar. This will be accessible from context menues on each section that needs settings.
+
+    //TODO need to add Settings Screen as route, but not include in tab bar.
+    
+    
 
     return (
-        // <NavigationContainer>
-        //     <Tab.Navigator
-        //         // tabBar={(props) => <NavBar {...props} />} // todo This would be using my own navbar that I'm passing these screens into.
-        //         initialRouteName={journalName}
-        //         screenOptions={({ route }) => ({
-        //             headerShown: false,
-        //             tabBarIcon: ({ focused, color, size }) => {
-        //                 let iconName
-        //                 let routeName = route.name
+        <NavigationContainer>
+            <Tab.Navigator
+                // tabBar={(props) => <NavBar {...props} />} // todo This would be using my own navbar that I'm passing these screens into.
+                initialRouteName={journalName}
+                screenOptions={({ route }) => ({
+                    headerShown: false,
+                    tabBarIcon: ({ focused, color, size }) => {
+                        let iconName
+                        let routeName = route.name
 
-        //                 if (routeName === journalName) iconName = focused ? "journal" : "journal-outline"
-        //                 else if (routeName === settingsName) iconName = focused ? "settings" : "settings-outline"
-        //                 else iconName = focused ? "help" : "help-outline"
+                        if (routeName === moodTrackerName) iconName = focused ? "happy" : "happy-outline"
+                        else if (routeName === journalName) iconName = focused ? "journal" : "journal-outline"
+                        // else if (routeName === settingsName) iconName = focused ? "settings" : "settings-outline"
+                        else iconName = focused ? "help" : "help-outline"
 
-        //                 size = 36
+                        size = 36
 
-        //                 // @ts-ignore
-        //                 return <Ionicons name={iconName} size={size} color={color} />
-        //             },
-        //             tabBarActiveTintColor: tabBarColors.iconActive,
-        //             tabBarInactiveTintColor: tabBarColors.iconInactive,
-        //             tabBarLabelStyle: {
-        //                 paddingBottom: 10,
-        //                 fontSize: 16
-        //             },
-        //             tabBarIconStyle: {
-        //             },
-        //             tabBarStyle: {
-        //                 padding: 10,
-        //                 height: 80,
-        //                 backgroundColor: tabBarColors.background,
-        //             }
-        //         })
-        //         }
+                        // @ts-ignore
+                        return <Ionicons name={iconName} size={size} color={color} />
+                    },
+                    tabBarActiveTintColor: tabBarColors.iconActive,
+                    tabBarInactiveTintColor: tabBarColors.iconInactive,
+                    tabBarLabelStyle: {
+                        paddingBottom: 10,
+                        fontSize: 16
+                    },
+                    tabBarIconStyle: {
+                        marginTop: 10,
+                    },
+                    tabBarStyle: {
+                        height: 80,
+                        backgroundColor: tabBarColors.background,
+                    },
+                    tabBarBadgeStyle: {
+                        // backgroundColor: "pink"
+
+                    },
+                    tabBarItemStyle: {
+                        // backgroundColor: "orange"
+                    },
+                    tabBarActiveBackgroundColor: tabBarColors.activeTabBackground,
+                    
+
+                    
+                })
+                }
 
 
-        //     >
-        //         {/* // todo Home_Screen */}
-        //         <Tab.Screen name={journalName} >
-        //             {(props) => <Journal
+            >
+                {/* // todo Home_Screen */}
+                <Tab.Screen name={moodTrackerName} >
+                    {(props) => <MoodTracker
 
-        //             />}
-        //         </Tab.Screen>
-        //         {/* // todo EmotionTracker_Screen */}
-        //         <Tab.Screen name={settingsName} >
-        //             {(props) => <Settings
+                    />}
+                </Tab.Screen>
+                <Tab.Screen name={journalName} >
+                    {(props) => <Journal
 
-        //             />}
-        //         </Tab.Screen>
+                    />}
+                </Tab.Screen>
+                {/* // todo EmotionTracker_Screen */}
+                {/* <Tab.Screen name={settingsName} >
+                    {(props) => <Settings
 
-        //     </Tab.Navigator>
-        // </NavigationContainer>
-        <Journal />
+                    />} */}
+                {/* </Tab.Screen> */}
+
+            </Tab.Navigator>
+        </NavigationContainer>
+        // <Journal />
         // <Settings />
     );
 }
