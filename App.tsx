@@ -15,6 +15,7 @@ import { Settings } from "./src/screens"
 import { useFonts } from "expo-font"
 import { generalColors, tabBarColors } from "./src/assets";
 
+const STORYBOOK_START: boolean = true
 
 export default function App() {
     let [fontsLoaded] = useFonts({

@@ -26,11 +26,15 @@ const JournalContainer = styled(Container)`
 const Journal: FunctionComponent = () => {
 
     // todo 1. Make headerbar that will contain current location, backbutton, and settings/extra buttons
-    
+
     return (
         <>
             {/* <StatusBar style="dark" /> */}
-            <TopBar label="Journal" />
+            <TopBar
+                label="Journal"
+                hasBackButton
+                hasDotsButton
+            />
             <JournalContainer>
 
             </JournalContainer>

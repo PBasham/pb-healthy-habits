@@ -30,8 +30,12 @@ interface TopBarProps {
     backgroundColor?: string
     bottomBorderColor?: string
 
+    /** Boolean for is this bar will have a back button */
+    hasBackButton?: boolean
     /** Function for back button press. Can be left blank to exclude. */
     onBackPress?: (() => void) | ((e: any) => void) | (() => any) | ((e: any) => any)
+    /** Boolean for is this bar will have a back button */
+    hasDotsButton?: boolean
     /** Function for dots press. Can be left blank to ecclude. */
     onDotsPress?: (() => void) | ((e: any) => void) | (() => any) | ((e: any) => any)
 }
@@ -51,7 +55,9 @@ const TopBar: FunctionComponent<TopBarProps> = (props: TopBarProps) => {
         backgroundColor,
         bottomBorderColor,
 
+        hasBackButton,
         onBackPress = () => console.log("Back button has been pressed!"),
+        hasDotsButton,
         onDotsPress = () => console.log("Dots button has been pressed!"),
     } = props
 
@@ -74,11 +80,17 @@ const TopBar: FunctionComponent<TopBarProps> = (props: TopBarProps) => {
     background-color: ${backgroundColor || generalColors.secondary};
 `;
 
+    const labelAlignmentOptions = {
+        left: "flex-start",
+        center: "center",
+        right: "flex-end",
+    }
+
     const LabelContainer = styled.View`
     justify-content: center;
     flex: 1;
 
-    align-items: ${labelAlignment};
+    align-items: ${labelAlignmentOptions[labelAlignment]};
 
     padding-left: 8px;
     padding-right: 8px;
@@ -104,27 +116,31 @@ const TopBar: FunctionComponent<TopBarProps> = (props: TopBarProps) => {
         <>
             <StatusBar style="light" />
             <TopBarContainer >
-                <BackBtnContainer>
-                    <Ionicons
-                        name="chevron-back-outline"
-                        size={36}
-                        color={backIconColor || iconsColor || textColors.dark_transparent}
-                        onPress={onBackPress}
-                    />
-                </BackBtnContainer>
+                {hasBackButton ?
+                    <BackBtnContainer>
+                        <Ionicons
+                            name="chevron-back-outline"
+                            size={36}
+                            color={backIconColor || iconsColor || textColors.dark_transparent}
+                            onPress={onBackPress}
+                        />
+                    </BackBtnContainer>
+                    : null}
                 <LabelContainer>
                     <HeaderThree textStyles={{ color: labelColor || textColors.dark_transparent }}>
                         {label}
                     </HeaderThree>
                 </LabelContainer>
+                {hasDotsButton ?
                 <DotsBtnContainer>
-                    <Ionicons
-                        name="ellipsis-vertical"
-                        size={36}
-                        color={dotsIconColor || iconsColor || textColors.dark_transparent}
-                        onPress={onDotsPress}
-                    />
-                </DotsBtnContainer>
+                <Ionicons
+                    name="ellipsis-vertical"
+                    size={36}
+                    color={dotsIconColor || iconsColor || textColors.dark_transparent}
+                    onPress={onDotsPress}
+                />
+            </DotsBtnContainer>
+            : null}
             </TopBarContainer>
         </>
     )
