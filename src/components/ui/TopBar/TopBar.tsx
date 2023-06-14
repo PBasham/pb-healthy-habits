@@ -7,6 +7,7 @@ import { generalColors, textColors } from "../../../assets";
 import { HeaderOne, HeaderThree, HeaderTwo } from "../text";
 // misc --------------------------------------------------
 import { Ionicons } from '@expo/vector-icons';
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 // colors
 
 
@@ -74,12 +75,12 @@ const TopBar: FunctionComponent<TopBarProps> = (props: TopBarProps) => {
     align-items: center;
     /* gap: 10px; */
     
-    height: 100px;
+    height: 60px;
     width: 100%;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-top: 40px;
-    padding-bottom: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+    /* padding-top: 10px; */
+    /* padding-bottom: 10px; */
     border-bottom-width: 2px;
     border-bottom-color: ${bottomBorderColor || generalColors.borders};
 
@@ -127,45 +128,44 @@ const TopBar: FunctionComponent<TopBarProps> = (props: TopBarProps) => {
 
     return (
         <>
-            <StatusBar style="light" />
-            <TopBarContainer >
-                {hasBackButton ?
-                    <BackBtnContainer>
-                        <Ionicons
-                            name="chevron-back-outline"
-                            size={36}
-                            color={backIconColor || iconsColor}
-                            onPress={onBackPress}
+                <TopBarContainer >
+                    {hasBackButton ?
+                        <BackBtnContainer>
+                            <Ionicons
+                                name="chevron-back-outline"
+                                size={36}
+                                color={backIconColor || iconsColor}
+                                onPress={onBackPress}
+                            />
+                        </BackBtnContainer>
+                        : null}
+                    <LabelContainer>
+                        <HeaderTwo
+                            text={label}
+                            textStyles={{ color: labelColor || textColors.dark_transparent }}
                         />
-                    </BackBtnContainer>
-                    : null}
-                <LabelContainer>
-                    <HeaderTwo
-                        text={label}
-                        textStyles={{ color: labelColor || textColors.dark_transparent }}
-                    />
-                </LabelContainer>
-                {hasPlusButton ?
-                    <PlusBtnContainer>
-                        <Ionicons
-                            name="add"
-                            size={36}
-                            color={dotsIconColor || iconsColor || textColors.dark_transparent}
-                            onPress={onDotsPress}
-                        />
-                    </PlusBtnContainer>
-                    : null}
-                {hasDotsButton ?
-                    <DotsBtnContainer>
-                        <Ionicons
-                            name="ellipsis-vertical"
-                            size={36}
-                            color={dotsIconColor || iconsColor || textColors.dark_transparent}
-                            onPress={onDotsPress}
-                        />
-                    </DotsBtnContainer>
-                    : null}
-            </TopBarContainer>
+                    </LabelContainer>
+                    {hasPlusButton ?
+                        <PlusBtnContainer>
+                            <Ionicons
+                                name="add"
+                                size={36}
+                                color={dotsIconColor || iconsColor || textColors.dark_transparent}
+                                onPress={onDotsPress}
+                            />
+                        </PlusBtnContainer>
+                        : null}
+                    {hasDotsButton ?
+                        <DotsBtnContainer>
+                            <Ionicons
+                                name="ellipsis-vertical"
+                                size={32}
+                                color={dotsIconColor || iconsColor || textColors.dark_transparent}
+                                onPress={onDotsPress}
+                            />
+                        </DotsBtnContainer>
+                        : null}
+                </TopBarContainer>
         </>
     )
 }

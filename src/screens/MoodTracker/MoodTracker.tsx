@@ -24,9 +24,11 @@ const MoodTrackerContainer = styled(Container)`
 const MoodTracker: FunctionComponent = () => {
     return (
         <>
-            <StatusBar style="light" />
             <TopBar
                 label="Mood Tracker"
+                hasBackButton
+                hasDotsButton
+                hasPlusButton
             />
             <MoodTrackerContainer>
                 <HeaderTwo
