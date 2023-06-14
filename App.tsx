@@ -45,7 +45,7 @@ export default function App() {
         <NavigationContainer>
             <Tab.Navigator
                 // tabBar={(props) => <NavBar {...props} />} // todo This would be using my own navbar that I'm passing these screens into.
-                initialRouteName={journalName}
+                initialRouteName={moodTrackerName}
                 screenOptions={({ route }) => ({
                     headerShown: false,
                     tabBarIcon: ({ focused, color, size }) => {

@@ -6,26 +6,53 @@ import styled from "styled-components/native"
 import { textColors } from "../../../../assets"
 
 
-const SubTextStyle = styled.Text`
-    font-size: 13px;
-    color: ${textColors.subText};
-    text-align: left;
-    font-family: Lato-Regular;
-`
 export interface SubTextProps {
+    /** Text to display */
+    text?: string
+    /** Font size for text */
+    fontSize?: string
+    /** Color of text */
+    textColor?: string
+    /** Alignment for text */
+    textAlignment?: "left" | "center" | "right" | " justify" | "start" | "end"
+    /** Vertical Alignment for text */
+    textVerticalAlignment?: "top" | "middle" | "bottom"
+
+    /** Additional css styling */
     textStyles?: StyleProp<TextStyle>;
-    children: ReactNode;
-    onPress?: (() => void) | ((e: any) => void);
+
+    /** On press funciton for header */
+    onPress?: (() => void) | ((e: any) => void)
 }
 
 const SubText: FunctionComponent<SubTextProps> = (props: SubTextProps) => {
-    const { 
-        textStyles, 
-        children, 
-        onPress = () => console.log("I've been clicked!"),
+    const {
+        text,
+        fontSize = "14px",
+        textColor = textColors.subText,
+        textAlignment = "center",
+        textVerticalAlignment = "middle",
+
+        textStyles,
+
+        onPress = () => console.log("I've been clicked!")
     } = props
 
-    return <SubTextStyle style={textStyles} onPress={onPress} >{children}</SubTextStyle>
+    const SubTextStyle = styled.Text`
+    /* padding-bottom: 5px; */
+    width: 100%;
+    
+    color: ${textColor};
+    
+    font-size: ${fontSize};
+    text-align: ${textAlignment};
+    vertical-align: ${textVerticalAlignment};
+    /* font-weight: bold; */
+    /* font-family: Lato-Bold; */
+
+`
+
+    return <SubTextStyle style={textStyles} onPress={onPress} >{text}</SubTextStyle>
 }
 
 export default SubText

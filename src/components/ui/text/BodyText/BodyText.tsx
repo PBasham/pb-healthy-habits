@@ -6,26 +6,53 @@ import styled from "styled-components/native"
 import { textColors } from "../../../../assets"
 
 
-const BodyTextStyle = styled.Text`
-    font-size: 16px;
-    color: ${textColors.body};
-    text-align: left;
-    font-family: Lato-Regular;
-`
 export interface BodyTextProps {
+    /** Text to display */
+    text?: string
+    /** Font size for text */
+    fontSize?: string
+    /** Color of text */
+    textColor?: string
+    /** Alignment for text */
+    textAlignment?: "left" | "center" | "right" | " justify" | "start" | "end"
+    /** Vertical Alignment for text */
+    textVerticalAlignment?: "top" | "middle" | "bottom"
+
+    /** Additional css styling */
     textStyles?: StyleProp<TextStyle>;
-    children: ReactNode;
+
+    /** On press funciton for header */
     onPress?: (() => void) | ((e: any) => void)
 }
 
 const BodyText: FunctionComponent<BodyTextProps> = (props: BodyTextProps) => {
     const {
+        text,
+        fontSize = "16px",
+        textColor = textColors.body,
+        textAlignment = "center",
+        textVerticalAlignment = "middle",
+
         textStyles,
-        children,
+
         onPress = () => console.log("I've been clicked!")
     } = props
 
-    return <BodyTextStyle style={textStyles} onPress={onPress} >{children}</BodyTextStyle>
+    const BodyTextStyle = styled.Text`
+    /* padding-bottom: 5px; */
+    width: 100%;
+    
+    color: ${textColor};
+    
+    font-size: ${fontSize};
+    text-align: ${textAlignment};
+    vertical-align: ${textVerticalAlignment};
+    /* font-weight: bold; */
+    /* font-family: Lato-Bold; */
+
+`
+
+    return <BodyTextStyle style={textStyles} onPress={onPress} >{text}</BodyTextStyle>
 }
 
 export default BodyText

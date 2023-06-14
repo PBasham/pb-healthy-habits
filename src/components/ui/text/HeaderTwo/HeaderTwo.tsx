@@ -9,11 +9,16 @@ import { textColors } from "../../../../assets"
 export interface HeaderTwoProps {
     /** Text to display */
     text?: string
-    /** Alignment for text */
-    textAlignment?: "left" | "center" | "right" | " justify" | "start" | "end"
+    /** Font size for text */
+    fontSize?: string
     /** Color of text */
     textColor?: string
+    /** Alignment for text */
+    textAlignment?: "left" | "center" | "right" | " justify" | "start" | "end"
+    /** Vertical Alignment for text */
+    textVerticalAlignment?: "top" | "middle" | "bottom"
 
+    /** Additional css styling */
     textStyles?: StyleProp<TextStyle>;
 
     /** On press funciton for header */
@@ -23,22 +28,28 @@ export interface HeaderTwoProps {
 const HeaderTwo: FunctionComponent<HeaderTwoProps> = (props: HeaderTwoProps) => {
     const {
         text,
+        fontSize = "28px",
+        textColor = textColors.header_Two,
         textAlignment = "center",
-        
+        textVerticalAlignment = "middle",
+
         textStyles,
-        
+
         onPress = () => console.log("I've been clicked!")
     } = props
 
     const HeaderTwoStyle = styled.Text`
-    
-    color: ${textColors.header_One};
-
+    /* padding-bottom: 5px; */
     width: 100%;
+    /* min-height: 35px; */
+
+    color: ${textColor};
     
-    font-size: 30px;
+    font-size: ${fontSize};
     text-align: ${textAlignment};
-    font-family: Lato-Bold;
+    vertical-align: ${textVerticalAlignment};
+    /* font-weight: bold; */
+    /* font-family: Lato-Bold; */
 
 `
 

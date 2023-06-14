@@ -29,9 +29,10 @@ const MoodTracker: FunctionComponent = () => {
                 label="Mood Tracker"
             />
             <MoodTrackerContainer>
-                <HeaderOne
+                <HeaderTwo
                     text={"How are you feeling today?"}
                 />
+                
             </MoodTrackerContainer>
         </>
     )

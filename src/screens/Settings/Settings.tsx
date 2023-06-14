@@ -25,9 +25,7 @@ const Settings: FunctionComponent = () => {
         <>
             <StatusBar style="light" />
             <SettingsContainer>
-                <HeaderOne>
-                    Settings Screen!
-                </HeaderOne>
+                <HeaderOne />
             </SettingsContainer>
         </>
     )

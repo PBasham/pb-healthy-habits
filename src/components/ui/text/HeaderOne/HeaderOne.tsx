@@ -15,6 +15,8 @@ export interface HeaderOneProps {
     textColor?: string
     /** Alignment for text */
     textAlignment?: "left" | "center" | "right" | " justify" | "start" | "end"
+    /** Vertical Alignment for text */
+    textVerticalAlignment?: "top" | "middle" | "bottom"
 
     /** Additional css styling */
     textStyles?: StyleProp<TextStyle>;
@@ -29,6 +31,7 @@ const HeaderOne: FunctionComponent<HeaderOneProps> = (props: HeaderOneProps) => 
         fontSize = "37px",
         textColor = textColors.header_One,
         textAlignment = "center",
+        textVerticalAlignment = "middle",
 
         textStyles,
 
@@ -36,14 +39,16 @@ const HeaderOne: FunctionComponent<HeaderOneProps> = (props: HeaderOneProps) => 
     } = props
 
     const HeaderOneStyle = styled.Text`
-    
+    /* padding-bottom: 5px; */
     width: 100%;
     
     color: ${textColor};
     
     font-size: ${fontSize};
     text-align: ${textAlignment};
-    font-family: Lato-Bold;
+    vertical-align: ${textVerticalAlignment};
+    /* font-weight: bold; */
+    /* font-family: Lato-Bold; */
 
 `
 
