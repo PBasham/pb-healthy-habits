@@ -28,7 +28,7 @@ export interface BodyTextProps {
 const BodyText: FunctionComponent<BodyTextProps> = (props: BodyTextProps) => {
     const {
         text,
-        fontSize = "16px",
+        fontSize = "20px",
         textColor = textColors.body,
         textAlignment = "center",
         textVerticalAlignment = "middle",

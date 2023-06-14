@@ -32,7 +32,12 @@ const MoodTracker: FunctionComponent = () => {
                 <HeaderTwo
                     text={"How are you feeling today?"}
                 />
-                
+                <BodyText 
+                    text="Body text"
+                />
+                <SubText
+                    text="Subtext"
+                />
             </MoodTrackerContainer>
         </>
     )

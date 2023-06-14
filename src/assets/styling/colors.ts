@@ -24,7 +24,7 @@ export const textColors = {
     header_Two: "#000",
     header_Three: "#000",
     body: "#000",
-    subText: "#DDD",
+    subText: "#AAA",
 }
 
 export const tabBarColors = {

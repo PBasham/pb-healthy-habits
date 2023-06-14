@@ -28,7 +28,7 @@ export interface SubTextProps {
 const SubText: FunctionComponent<SubTextProps> = (props: SubTextProps) => {
     const {
         text,
-        fontSize = "14px",
+        fontSize = "18px",
         textColor = textColors.subText,
         textAlignment = "center",
         textVerticalAlignment = "middle",
