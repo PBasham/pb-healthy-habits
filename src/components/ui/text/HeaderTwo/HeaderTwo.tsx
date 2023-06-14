@@ -6,26 +6,43 @@ import styled from "styled-components/native"
 import { textColors } from "../../../../assets"
 
 
-const HeaderTwoStyle = styled.Text`
-    font-size: 32px;
-    color: ${textColors.header_One};
-    text-align: left;
-    font-family: Lato-Bold;
-`
 export interface HeaderTwoProps {
+    /** Text to display */
+    text?: string
+    /** Alignment for text */
+    textAlignment?: "left" | "center" | "right" | " justify" | "start" | "end"
+    /** Color of text */
+    textColor?: string
+
     textStyles?: StyleProp<TextStyle>;
-    children: ReactNode
+
+    /** On press funciton for header */
     onPress?: (() => void) | ((e: any) => void)
 }
 
 const HeaderTwo: FunctionComponent<HeaderTwoProps> = (props: HeaderTwoProps) => {
     const {
+        text,
+        textAlignment = "center",
+        
         textStyles,
-        children,
+        
         onPress = () => console.log("I've been clicked!")
     } = props
 
-    return <HeaderTwoStyle style={textStyles} onPress={onPress} >{children}</HeaderTwoStyle>
+    const HeaderTwoStyle = styled.Text`
+    
+    color: ${textColors.header_One};
+
+    width: 100%;
+    
+    font-size: 30px;
+    text-align: ${textAlignment};
+    font-family: Lato-Bold;
+
+`
+
+    return <HeaderTwoStyle style={textStyles} onPress={onPress} >{text}</HeaderTwoStyle>
 }
 
 export default HeaderTwo

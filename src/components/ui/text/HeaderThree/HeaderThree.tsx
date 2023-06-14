@@ -6,26 +6,43 @@ import styled from "styled-components/native"
 import { textColors } from "../../../../assets"
 
 
-const HeaderThreeStyle = styled.Text`
-    font-size: 24px;
-    color: ${textColors.header_Three};
-    text-align: left;
-    font-family: Lato-Bold;
-`
 export interface HeaderThreeProps {
+    /** Text to display */
+    text?: string
+    /** Alignment for text */
+    textAlignment?: "left" | "center" | "right" | " justify" | "start" | "end"
+    /** Color of text */
+    textColor?: string
+
     textStyles?: StyleProp<TextStyle>;
-    children: ReactNode
+
+    /** On press funciton for header */
     onPress?: (() => void) | ((e: any) => void)
 }
 
 const HeaderThree: FunctionComponent<HeaderThreeProps> = (props: HeaderThreeProps) => {
     const {
+        text,
+        textAlignment = "center",
+        
         textStyles,
-        children,
+        
         onPress = () => console.log("I've been clicked!")
     } = props
 
-    return <HeaderThreeStyle style={textStyles} onPress={onPress} >{children}</HeaderThreeStyle>
+    const HeaderThreeStyle = styled.Text`
+    
+    color: ${textColors.header_One};
+
+    width: 100%;
+    
+    font-size: 24px;
+    text-align: ${textAlignment};
+    font-family: Lato-Bold;
+
+`
+
+    return <HeaderThreeStyle style={textStyles} onPress={onPress} >{text}</HeaderThreeStyle>
 }
 
 export default HeaderThree

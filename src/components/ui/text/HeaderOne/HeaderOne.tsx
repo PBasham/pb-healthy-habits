@@ -6,26 +6,48 @@ import styled from "styled-components/native"
 import { textColors } from "../../../../assets"
 
 
-const HeaderOneStyle = styled.Text`
-    font-size: 37px;
-    color: ${textColors.header_One};
-    text-align: left;
-    font-family: Lato-Bold;
-`
 export interface HeaderOneProps {
+    /** Text to display */
+    text?: string
+    /** Font size for text */
+    fontSize?: string
+    /** Color of text */
+    textColor?: string
+    /** Alignment for text */
+    textAlignment?: "left" | "center" | "right" | " justify" | "start" | "end"
+
+    /** Additional css styling */
     textStyles?: StyleProp<TextStyle>;
-    children: ReactNode
+
+    /** On press funciton for header */
     onPress?: (() => void) | ((e: any) => void)
 }
 
 const HeaderOne: FunctionComponent<HeaderOneProps> = (props: HeaderOneProps) => {
     const {
+        text,
+        fontSize = "37px",
+        textColor = textColors.header_One,
+        textAlignment = "center",
+
         textStyles,
-        children,
+
         onPress = () => console.log("I've been clicked!")
     } = props
 
-    return <HeaderOneStyle style={textStyles} onPress={onPress} >{children}</HeaderOneStyle>
+    const HeaderOneStyle = styled.Text`
+    
+    width: 100%;
+    
+    color: ${textColor};
+    
+    font-size: ${fontSize};
+    text-align: ${textAlignment};
+    font-family: Lato-Bold;
+
+`
+
+    return <HeaderOneStyle style={textStyles} onPress={onPress} >{text}</HeaderOneStyle>
 }
 
 export default HeaderOne

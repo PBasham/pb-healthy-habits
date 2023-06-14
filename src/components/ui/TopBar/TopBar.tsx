@@ -35,6 +35,10 @@ interface TopBarProps {
     /** Function for back button press. Can be left blank to exclude. */
     onBackPress?: (() => void) | ((e: any) => void) | (() => any) | ((e: any) => any)
     /** Boolean for is this bar will have a back button */
+    hasPlusButton?: boolean
+    /** Function for Plus press. Can be left blank to ecclude. */
+    onPlusPress?: (() => void) | ((e: any) => void) | (() => any) | ((e: any) => any)
+    /** Boolean for is this bar will have a back button */
     hasDotsButton?: boolean
     /** Function for dots press. Can be left blank to ecclude. */
     onDotsPress?: (() => void) | ((e: any) => void) | (() => any) | ((e: any) => any)
@@ -45,10 +49,10 @@ const TopBar: FunctionComponent<TopBarProps> = (props: TopBarProps) => {
 
     const {
         label,
-        labelColor,
+        labelColor = textColors.dark_transparent,
         labelAlignment = "center",
 
-        iconsColor,
+        iconsColor = textColors.dark_transparent,
         backIconColor,
         dotsIconColor,
 
@@ -57,6 +61,8 @@ const TopBar: FunctionComponent<TopBarProps> = (props: TopBarProps) => {
 
         hasBackButton,
         onBackPress = () => console.log("Back button has been pressed!"),
+        hasPlusButton,
+        onPlusPress = () => console.log("Back button has been pressed!"),
         hasDotsButton,
         onDotsPress = () => console.log("Dots button has been pressed!"),
     } = props
@@ -103,6 +109,13 @@ const TopBar: FunctionComponent<TopBarProps> = (props: TopBarProps) => {
     height: 100%;
     width: 50px;
     `
+    const PlusBtnContainer = styled.View`
+    justify-content: center;
+    align-items: flex-end;
+
+    height: 100%;
+    width: 50px;
+    `
     const DotsBtnContainer = styled.View`
     justify-content: center;
     align-items: flex-end;
@@ -121,26 +134,37 @@ const TopBar: FunctionComponent<TopBarProps> = (props: TopBarProps) => {
                         <Ionicons
                             name="chevron-back-outline"
                             size={36}
-                            color={backIconColor || iconsColor || textColors.dark_transparent}
+                            color={backIconColor || iconsColor}
                             onPress={onBackPress}
                         />
                     </BackBtnContainer>
                     : null}
                 <LabelContainer>
-                    <HeaderThree textStyles={{ color: labelColor || textColors.dark_transparent }}>
-                        {label}
-                    </HeaderThree>
+                    <HeaderTwo
+                        text={label}
+                        textStyles={{ color: labelColor || textColors.dark_transparent }}
+                    />
                 </LabelContainer>
+                {hasPlusButton ?
+                    <PlusBtnContainer>
+                        <Ionicons
+                            name="add"
+                            size={36}
+                            color={dotsIconColor || iconsColor || textColors.dark_transparent}
+                            onPress={onDotsPress}
+                        />
+                    </PlusBtnContainer>
+                    : null}
                 {hasDotsButton ?
-                <DotsBtnContainer>
-                <Ionicons
-                    name="ellipsis-vertical"
-                    size={36}
-                    color={dotsIconColor || iconsColor || textColors.dark_transparent}
-                    onPress={onDotsPress}
-                />
-            </DotsBtnContainer>
-            : null}
+                    <DotsBtnContainer>
+                        <Ionicons
+                            name="ellipsis-vertical"
+                            size={36}
+                            color={dotsIconColor || iconsColor || textColors.dark_transparent}
+                            onPress={onDotsPress}
+                        />
+                    </DotsBtnContainer>
+                    : null}
             </TopBarContainer>
         </>
     )

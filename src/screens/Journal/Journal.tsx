@@ -32,8 +32,6 @@ const Journal: FunctionComponent = () => {
             {/* <StatusBar style="dark" /> */}
             <TopBar
                 label="Journal"
-                hasBackButton
-                hasDotsButton
             />
             <JournalContainer>
 
