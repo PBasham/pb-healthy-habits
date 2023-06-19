@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 
 // components --------------------------------------------------
-import AppLoading from "expo-app-loading"
+
 import { NavigationContainer, TabRouter } from "@react-navigation/native";
 import { SafeAreaProvider, initialWindowMetrics } from "react-native-safe-area-context";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
@@ -26,9 +26,9 @@ export default function App() {
         "Lato-Light": require("./src/assets/typography/Lato/Lato-Light.ttf"),
     })
 
-    if (!fontsLoaded) {
-        return <AppLoading />
-    }
+    // if (!fontsLoaded) {
+    //     return <AppLoading />
+    // }
 
     const Tab = createBottomTabNavigator()
 

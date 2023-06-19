@@ -38,9 +38,7 @@ const HeaderThree: FunctionComponent<HeaderThreeProps> = (props: HeaderThreeProp
         onPress
     } = props
 
-    const HeaderThreeStyle = styled.Text`
-    flex: 1;
-    
+    const HeaderThreeStyle = styled.Text`    
     color: ${textColor};
     
     font-size: ${fontSize};

@@ -40,6 +40,7 @@ import { EmotionLog } from "../interfaces";
  */
 export async function getEmotionLog(): Promise<EmotionLog | null> {
     let result: string | null = await AsyncStorage.getItem("Emotion-Log")
+    console.log("result of getEmotionLog: ", result)
 
     if (!result) return null
 

@@ -34,7 +34,7 @@ export interface JournalEntry {
 }
 //* Mood Tracking --------------------------------------------------
 // emotion tracker
-export type EmotionLog = LoggedEmotion[]
+export type EmotionLog = LoggedEmotion[] | null
 
 export interface LoggedEmotion {
     /** Time of creation */
@@ -51,7 +51,7 @@ export interface LoggedEmotion {
 
 //* Misc types --------------------------------------------------
 // Emotion
-export type Emotion = "happy" | "caring" | "greatful" | "excited" | "loved" | "Respected" | "valued" | "accepted" | "confident" | "brave" | "hopeful" | "powerful" | "playful" | "creative" | "curious" | "affectionate" | "embarrassed" | "guilty" | "excluded" | "ashamed" | "angry" | "annoyed" | "jealous" | "bored" | "scared" | "overwhelmed" | "powerless" | "anxious" | "sad" | "disappointed" | "hurt" | "lonely" | UserEmotion | undefined
+export type Emotion = "happy" | "caring" | "greatful" | "excited" | "loved" | "Respected" | "valued" | "accepted" | "confident" | "brave" | "hopeful" | "powerful" | "playful" | "creative" | "curious" | "affectionate" | "embarrassed" | "guilty" | "excluded" | "ashamed" | "angry" | "annoyed" | "jealous" | "bored" | "scared" | "overwhelmed" | "powerless" | "anxious" | "sad" | "disappointed" | "hurt" | "lonely" | UserEmotion
 
 // This is used to define a users custom entered emotion.
 export type UserEmotion = string 
