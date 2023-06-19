@@ -1,19 +1,21 @@
 // import dependencies --------------------------------------------------
 import { StyleSheet, Text, View } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-import AppLoading from "expo-app-loading"
 
-import { NavigationContainer, TabRouter } from "@react-navigation/native";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
-import { Ionicons } from '@expo/vector-icons';
 // components --------------------------------------------------
+import AppLoading from "expo-app-loading"
+import { NavigationContainer, TabRouter } from "@react-navigation/native";
+import { SafeAreaProvider, initialWindowMetrics } from "react-native-safe-area-context";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 // screens
 import { Journal, Settings, MoodTracker } from "./src/screens";
 // misc --------------------------------------------------
 // fonts
 import { useFonts } from "expo-font"
+// colors
 import { generalColors, tabBarColors } from "./src/assets";
-import { SafeAreaProvider } from "react-native-safe-area-context";
+// icons
+import { Ionicons } from '@expo/vector-icons';
 
 const STORYBOOK_START: boolean = true
 
@@ -43,7 +45,7 @@ export default function App() {
 
 
     return (
-        <SafeAreaProvider >
+        <SafeAreaProvider initialMetrics={initialWindowMetrics} >
             <NavigationContainer>
                 <Tab.Navigator
                     // tabBar={(props) => <NavBar {...props} />} // todo This would be using my own navbar that I'm passing these screens into.

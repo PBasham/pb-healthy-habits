@@ -110,7 +110,7 @@ const StandardButton: FunctionComponent<StandardButtonProps> = (props: StandardB
                 />
                 : null
             }
-            <StyledButtonText>{text}</StyledButtonText>
+            <StyledButtonText style={textStyles} >{text}</StyledButtonText>
         </StandardButtonContainer>
     )
 }

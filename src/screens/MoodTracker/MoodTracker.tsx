@@ -10,6 +10,7 @@ import { HeaderOne, HeaderTwo, HeaderThree, BodyText, SubText } from "../../comp
 import { generalColors } from "../../assets";
 import { StandardButton, TopBar } from "../../components/ui";
 import { ContainerFlexTwo } from "../../components/shared/shared";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const MoodTrackerContainer = styled(Container)`
     width: 100%;
@@ -31,28 +32,33 @@ const CreateLogButtonContainer = styled(Container)`
 const MoodTracker: FunctionComponent = () => {
     return (
         <>
-            <TopBar
-                label="Mood Tracker"
-            />
-            <MoodTrackerContainer>
-                <CreateLogContainer>
-                    <HeaderTwo text={"How are you feeling today?"} />
-                    <CreateLogButtonContainer>
-                        <StandardButton
-                            text="Log mood"
-                            iconName="happy"
-                            backgroundColor={generalColors.accent_blue}
-                            onPress={() => console.log("I've been pressed!")}
-                        />
-                    </CreateLogButtonContainer>
-                </CreateLogContainer>
-                <ContainerFlexTwo>
-                    {/* //todo build out scrollable view for emotions logged today. */}
-                    <BodyText text={"You haven't logged anything for today."} />
+            <SafeAreaView edges={['top']} >
+                <TopBar
+                    label="Mood Tracker"
+                />
+            </SafeAreaView>
+            <SafeAreaView mode="padding" style={{flex: 1}} edges={['left', 'right']} >
+                <MoodTrackerContainer>
+                    <CreateLogContainer>
+                        <HeaderTwo text={"How are you feeling today?"} />
+                        <CreateLogButtonContainer>
+                            <StandardButton
+                                text="Log mood"
+                                iconName="add"
+                                backgroundColor={generalColors.accent_blue}
+                                onPress={() => console.log("I've been pressed!")}
+                                textStyles={{ fontWeight: "bold" }}
+                            />
+                        </CreateLogButtonContainer>
+                    </CreateLogContainer>
+                    <ContainerFlexTwo>
+                        {/* //todo build out scrollable view for emotions logged today. */}
+                        <BodyText text={"You haven't logged anything for today."} />
 
 
-                </ContainerFlexTwo>
-            </MoodTrackerContainer>
+                    </ContainerFlexTwo>
+                </MoodTrackerContainer>
+            </SafeAreaView>
         </>
     )
 }
