@@ -35,13 +35,11 @@ const HeaderThree: FunctionComponent<HeaderThreeProps> = (props: HeaderThreeProp
 
         textStyles,
 
-        onPress = () => console.log("I've been clicked!")
+        onPress
     } = props
 
     const HeaderThreeStyle = styled.Text`
-    /* padding: 15px; */
-    width: 100%;
-    /* min-height: 35px; */
+    flex: 1;
     
     color: ${textColor};
     

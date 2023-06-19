@@ -38,3 +38,9 @@ export const tabBarColors = {
     // iconInactive: "rgba(0,0,0,.5)",
     // background: "#85c6d8",
 }
+export const buttonColors = {
+    background: "#fff",
+    text: "rgba(0,0,0,.5)",
+    icon: "rgba(0,0,0,.5)",
+    shadow: "black",
+}

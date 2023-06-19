@@ -20,11 +20,12 @@ const MoodTrackerContainer = styled(Container)`
     padding-bottom: 40px;
 `;
 
-const CreateLogContainer = styled.View`
-    flex: 1;
-    height: 100%;
-    width: 100%;
-    
+const CreateLogContainer = styled(Container)`
+
+`
+const CreateLogButtonContainer = styled(Container)`
+    justify-content: center;
+    align-items: center;
 `
 
 const MoodTracker: FunctionComponent = () => {
@@ -34,20 +35,21 @@ const MoodTracker: FunctionComponent = () => {
                 label="Mood Tracker"
             />
             <MoodTrackerContainer>
-                <Container>
+                <CreateLogContainer>
                     <HeaderTwo text={"How are you feeling today?"} />
-                    {/* //todo Build out Log emotion button */}
-                    {/* //todo Build  */}
-                    <CreateLogContainer>
-                    <StandardButton 
-                        text="Click me"
-                    />
-                    </CreateLogContainer>
-                </Container>
+                    <CreateLogButtonContainer>
+                        <StandardButton
+                            text="Log mood"
+                            iconName="happy"
+                            backgroundColor={generalColors.accent_blue}
+                            onPress={() => console.log("I've been pressed!")}
+                        />
+                    </CreateLogButtonContainer>
+                </CreateLogContainer>
                 <ContainerFlexTwo>
                     {/* //todo build out scrollable view for emotions logged today. */}
                     <BodyText text={"You haven't logged anything for today."} />
-                    
+
 
                 </ContainerFlexTwo>
             </MoodTrackerContainer>

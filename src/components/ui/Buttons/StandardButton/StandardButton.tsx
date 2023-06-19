@@ -1,35 +1,44 @@
 import React, { FunctionComponent } from "react";
-import { Button, StyleSheet, Text, View } from "react-native";
+import { Button, StyleProp, StyleSheet, Text, TextStyle, View, ViewStyle } from "react-native";
 import styled from "styled-components/native";
-import DropShadow from "react-native-drop-shadow";
+import { Ionicons } from '@expo/vector-icons';
 
 // misc --------------------------------------------------
 // colors
 import { generalColors } from "../../../../assets";
 import { BodyText, HeaderThree } from "../../text";
+import { buttonColors, textColors } from "../../../../assets/styling/colors";
 
 interface StandardButtonProps {
     /** Text to display */
     text?: string
     /** Font size for text */
     fontSize?: string
+    /** Case of font. */
+    textCase?: "UPPER" | "lower" | "Proper"
     /** Color of text */
     textColor?: string
     /** Alignment for text */
     textAlignment?: "left" | "center" | "right" | " justify" | "start" | "end"
+    /** Text styles */
+    textStyles?: StyleProp<TextStyle>
 
 
     /** Icon Name */
     iconName?: string
     /** Icon Color */
     iconColor?: string
+    /** Icon Size. Default is 32 */
+    iconSize?: number
     /** Icon Position */
-    iconPosition?: string
-
-
+    iconPosition?: "left" | "right" | "top" | "bottom"
+    /** Icon Styles */
+    iconStyles?: StyleProp<TextStyle>
 
     /** Background color of button */
     backgroundColor?: string
+    /** Button Styles */
+    buttonStyles?: StyleProp<ViewStyle>
 
     /** On press funciton for header */
     onPress?: (() => void) | ((e: any) => void)
@@ -38,30 +47,70 @@ interface StandardButtonProps {
 
 
 const StandardButton: FunctionComponent<StandardButtonProps> = (props: StandardButtonProps) => {
-    const { text, fontSize, textColor, textAlignment, backgroundColor } = props
+    const {
+        text,
+        fontSize = "24px",
+        textCase,
+        textColor = buttonColors.text,
+        textAlignment = "center",
+        textStyles,
 
+        iconName,
+        iconColor = buttonColors.icon,
+        iconSize = 32,
+        iconPosition = "left",
+        iconStyles,
+
+        buttonStyles,
+        backgroundColor = buttonColors.background,
+
+        onPress
+    } = props
+
+    // justify-content: center;
+    // align-items: center;
+    // flex-direction: row;
+
+    // margin: 15px;
+    // padding: 15px;
     const StandardButtonContainer = styled.Pressable`
-        justify-content: center;
+        flex-direction: row;
         align-items: center;
+        justify-content: center;
 
-        min-height: 60px;
-        min-width: 50%;
-        max-width: 80%;
-        background-color: ${backgroundColor ?? generalColors.secondary};
+        padding: 10px;
+        gap: 10px;
+        /* width: 80%; */
+        background-color: ${backgroundColor ?? generalColors.primary};
 
-        shadow-color: ${generalColors.button_shadow};
+        shadow-color: ${buttonColors.shadow};
         shadow-offset: 0px 0px;
         shadow-radius: 5px;
         shadow-opacity: .8;
         elevation: 10;
     `
+    const StyledButtonText = styled.Text`
+        font-size: ${fontSize};
+        color: ${textColor};
+        text-align: ${textAlignment};
+    `
 
     return (
-        <StandardButtonContainer>
-            <HeaderThree
-                textColor="white"
-                text={text}
-            />
+        <StandardButtonContainer
+            onPress={onPress}
+            style={buttonStyles}
+        >
+            {iconName ?
+                <Ionicons
+                    // @ts-ignore
+                    name={iconName}
+                    color={iconColor}
+                    size={iconSize}
+                    style={iconStyles}
+                />
+                : null
+            }
+            <StyledButtonText>{text}</StyledButtonText>
         </StandardButtonContainer>
     )
 }
