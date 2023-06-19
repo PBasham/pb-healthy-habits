@@ -1,5 +1,4 @@
 import React, { FunctionComponent } from "react";
-import { StatusBar } from "expo-status-bar";
 import styled from "styled-components/native";
 import { StyleSheet, Text } from "react-native";
 // components --------------------------------------------------
@@ -29,7 +28,6 @@ const Journal: FunctionComponent = () => {
 
     return (
         <>
-            {/* <StatusBar style="dark" /> */}
             <TopBar
                 label="Journal"
             />

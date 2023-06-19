@@ -11,6 +11,7 @@ export const generalColors = {
 
     borders: "#D9D9D9",
     shadow: "#D9D9D9",
+    button_shadow: "black",
 
     accent_blue: "#DBF4F0",
 

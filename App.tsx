@@ -43,7 +43,7 @@ export default function App() {
 
 
     return (
-        // <SafeAreaProvider  >
+        <SafeAreaProvider >
             <NavigationContainer>
                 <Tab.Navigator
                     // tabBar={(props) => <NavBar {...props} />} // todo This would be using my own navbar that I'm passing these screens into.
@@ -113,6 +113,6 @@ export default function App() {
 
                 </Tab.Navigator>
             </NavigationContainer>
-        // </SafeAreaProvider>
+        </SafeAreaProvider>
     );
 }
