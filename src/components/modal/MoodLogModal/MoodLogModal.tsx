@@ -57,8 +57,6 @@ const MoodLogModal: FunctionComponent<MoodLogModalProps> = (props: MoodLogModalP
                     label={`${existingLog ? "Editing" : "New"} Log`}
                     hasBackButton
                     onBackPress={closeModal}
-                    // hasDotsButton
-                    hasPlusButton
                 />
                 <LoggedMoodModalContainer>
                     <TrackedTimeContainer>
