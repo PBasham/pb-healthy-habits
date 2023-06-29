@@ -33,8 +33,7 @@ export interface JournalEntry {
 
 }
 //* Mood Tracking --------------------------------------------------
-// emotion tracker
-export type EmotionLog = LoggedEmotion[] | null
+// emotion tracke
 
 export interface LoggedEmotion {
     /** Time of creation */

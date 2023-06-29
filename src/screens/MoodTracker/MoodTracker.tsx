@@ -15,6 +15,7 @@ import { StandardButton, TopBar } from "../../components/ui";
 import { ContainerFlexTwo, ScreenWidth } from "../../components/shared/shared";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { LoggedEmotion } from "../../interfaces";
+import MoodLogModal from "../../components/modal/MoodLogModal/MoodLogModal";
 
 interface MoodTrackerProps {
 
@@ -71,19 +72,25 @@ const MoodTracker: FunctionComponent<MoodTrackerProps> = (props: MoodTrackerProp
         return
     }
 
+
+    //* MoodLog Modal
+
+    const [isMoodLogModalVisible, setIsMoodLogModalVisible] = useState(false)
+
     function handleOpenMoodModal(): void {
         console.log("Entered handleOpenMoodModal() ====================")
-        
+        setIsMoodLogModalVisible(true)
+    }
+    function handleCloseMoodModal(): void {
+        console.log("Entered handleCloseMoodModal() ====================")
+        setIsMoodLogModalVisible(false)
     }
 
-    useEffect(() => {
-
-        handleGetMoodLog()
-
-    }, [])
+    useEffect(() => { handleGetMoodLog() }, [])
 
     return (
         <>
+            <MoodLogModal visible={isMoodLogModalVisible} closeModal={handleCloseMoodModal} />
             <SafeAreaView edges={['top']} children={<TopBar label="Mood Tracker" />} />
             <SafeAreaView mode="padding" style={{ flex: 1 }} edges={['left', 'right']} >
                 <MoodTrackerContainer>

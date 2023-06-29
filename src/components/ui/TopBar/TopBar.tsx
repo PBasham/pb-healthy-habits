@@ -100,7 +100,8 @@ const TopBar: FunctionComponent<TopBarProps> = (props: TopBarProps) => {
     align-items: ${labelAlignmentOptions[labelAlignment]};
 
     padding-left: 8px;
-    padding-right: 8px;
+    padding-right: ${hasBackButton && (!hasDotsButton && !hasPlusButton) ? "50px" : "8px"};
+
     height: 100%;
     `
     const BackBtnContainer = styled.View`

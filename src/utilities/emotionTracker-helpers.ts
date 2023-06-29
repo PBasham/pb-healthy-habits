@@ -1,5 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { Emotion, EmotionLog, LoggedEmotion } from "../interfaces";
+import { Emotion, LoggedEmotion } from "../interfaces";
 
 //* AsyncStorage.getItem("nameofitem") -> I need to be parsed with JSON.parse(resultOfGet)
 //* AsyncStorage.setItem("nameforitem", item)
