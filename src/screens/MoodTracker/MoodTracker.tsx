@@ -2,7 +2,7 @@ import React, { FunctionComponent, useEffect, useState } from "react";
 import { Button, StyleSheet, Text, View } from "react-native";
 import styled from "styled-components/native";
 
-import * as emotionTrackerHelpers from "../../utilities/emotionTracker-helpers"
+import * as moodTrackerHelpers from "../../utilities/emotionTracker-helpers"
 
 // components --------------------------------------------------
 import { Container } from "../../components/shared";
@@ -14,7 +14,7 @@ import { generalColors, textColors } from "../../assets";
 import { StandardButton, TopBar } from "../../components/ui";
 import { ContainerFlexTwo, ScreenWidth } from "../../components/shared/shared";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { EmotionLog, LoggedEmotion } from "../../interfaces";
+import { LoggedEmotion } from "../../interfaces";
 
 interface MoodTrackerProps {
 
@@ -25,7 +25,7 @@ const MoodTracker: FunctionComponent<MoodTrackerProps> = (props: MoodTrackerProp
 
     const { } = props
 
-    const [emotionsLog, setEmotionsLog] = useState<EmotionLog | null>(null)
+    const [moodLog, setMoodLog] = useState<LoggedEmotion[] | null>(null)
 
     const [logMessage, setLogMessage] = useState<string>("")
 
@@ -45,11 +45,11 @@ const MoodTracker: FunctionComponent<MoodTrackerProps> = (props: MoodTrackerProp
     `
 
 
-    async function handleGetEmotionLog(): Promise<void> {
-        const result: EmotionLog | null = await emotionTrackerHelpers.getEmotionLog()
+    async function handleGetMoodLog(): Promise<void> {
+        const result: LoggedEmotion[] | null = await moodTrackerHelpers.getEmotionLog()
 
         if (!result) {
-            setEmotionsLog(result)
+            setMoodLog(result)
             setLogMessage("You haven't logged anything for today.")
         } else {
             setLogMessage("You have stuff!")
@@ -57,36 +57,36 @@ const MoodTracker: FunctionComponent<MoodTrackerProps> = (props: MoodTrackerProp
 
         return
     }
-    async function handleAddEmotion(loggedEmotion: LoggedEmotion): Promise<void> {
+    async function handleAddEmotion(loggedMood: LoggedEmotion): Promise<void> {
 
-        if (!emotionsLog) return
-        if (!loggedEmotion) return
+        if (!moodLog) return
+        if (!loggedMood) return
 
 
-        let updatedEmotionLog: EmotionLog = [
-            ...emotionsLog,
-            { ...loggedEmotion }
+        let updatedMoodLog: LoggedEmotion[] = [
+            ...moodLog,
+            { ...loggedMood }
         ]
 
-        setEmotionsLog((prev: EmotionLog) => {
+        setMoodLog((prev) => {
             if (!prev) prev = []
 
             return [
                 ...prev,
-                ...updatedEmotionLog!
+                ...updatedMoodLog!
             ]
         })
 
         return
     }
 
-    function handleOpenEmotionModal() {
+    function handleOpenMoodModal() {
 
     }
 
     useEffect(() => {
 
-        handleGetEmotionLog()
+        handleGetMoodLog()
 
     }, [])
 
@@ -98,7 +98,7 @@ const MoodTracker: FunctionComponent<MoodTrackerProps> = (props: MoodTrackerProp
                     <CreateLogContainer>
                         <HeaderTwo text={"How are you feeling today?"} />
                         <CreateLogButtonContainer>
-                            {!emotionsLog ?
+                            {!moodLog ?
                                 <HeaderThree
                                     text={logMessage}
                                     textStyles={{
@@ -118,7 +118,7 @@ const MoodTracker: FunctionComponent<MoodTrackerProps> = (props: MoodTrackerProp
                             />
                         </CreateLogButtonContainer>
                     </CreateLogContainer>
-                    {emotionsLog ?
+                    {moodLog ?
                         <ContainerFlexTwo>
                         </ContainerFlexTwo>
 
