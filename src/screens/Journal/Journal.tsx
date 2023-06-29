@@ -9,6 +9,7 @@ import { TopBar } from "../../components/ui";
 // misc --------------------------------------------------
 // colors
 import { colors, generalColors, textColors } from "../../assets";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const JournalContainer = styled(Container)`
     /* background-color: ${colors.generalColors.light}; */
@@ -28,9 +29,7 @@ const Journal: FunctionComponent = () => {
 
     return (
         <>
-            <TopBar
-                label="Journal"
-            />
+            <SafeAreaView edges={['top']} children={<TopBar label="Journal" />} />
             <JournalContainer>
 
             </JournalContainer>
