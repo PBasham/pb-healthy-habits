@@ -13,6 +13,7 @@ import { StandardButton, TopBar } from "../../../components/ui";
 import { ContainerFlexTwo, ScreenWidth } from "../../../components/shared/shared";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { LoggedEmotion } from "../../../interfaces";
+import { EmotionWheel } from "../../../data/Emotions";
 
 
 interface MoodLogModalProps {
@@ -58,9 +59,11 @@ const MoodLogModal: FunctionComponent<MoodLogModalProps> = (props: MoodLogModalP
                     hasBackButton
                     onBackPress={closeModal}
                 />
-                <LoggedMoodModalContainer>
+                
+                {/* <LoggedMoodModalContainer>
                     <TrackedTimeContainer>
                         <HeaderThree text="Time Tracked:" textAlignment="left" />
+                        
                     </TrackedTimeContainer>
                     <SelectEmotionContainer>
                         <HeaderThree text="What are you feeling?" textAlignment="left" />
@@ -68,7 +71,7 @@ const MoodLogModal: FunctionComponent<MoodLogModalProps> = (props: MoodLogModalP
                     <FeelingSummaryContainer>
                         <HeaderThree text="Write a little about why you might be feeling this." textAlignment="left" />
                     </FeelingSummaryContainer>
-                </LoggedMoodModalContainer>
+                </LoggedMoodModalContainer> */}
             </Modal>
         </>
     )
