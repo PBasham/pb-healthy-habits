@@ -47,8 +47,8 @@ const MoodTracker: FunctionComponent<MoodTrackerProps> = (props: MoodTrackerProp
 
     async function handleGetMoodLog(): Promise<void> {
         const result = await moodTrackerHelpers.getMoodLog()
-
-        if (!result) {
+        console.log("Result from handleGetMoodLog(): ", result)
+        if (!result.length) {
             setMoodLog(result)
             setLogMessage("You haven't logged anything for today.")
         } else {
@@ -57,7 +57,7 @@ const MoodTracker: FunctionComponent<MoodTrackerProps> = (props: MoodTrackerProp
 
         return
     }
-    async function handleAddEmotion(loggedMood: LoggedEmotion): Promise<void> {
+    async function handleAddMoodToLog(loggedMood: LoggedEmotion): Promise<void> {
 
         // check that loggedMood is valid
         if (!loggedMood) return
@@ -71,8 +71,9 @@ const MoodTracker: FunctionComponent<MoodTrackerProps> = (props: MoodTrackerProp
         return
     }
 
-    function handleOpenMoodModal() {
-
+    function handleOpenMoodModal(): void {
+        console.log("Entered handleOpenMoodModal() ====================")
+        
     }
 
     useEffect(() => {
@@ -89,7 +90,7 @@ const MoodTracker: FunctionComponent<MoodTrackerProps> = (props: MoodTrackerProp
                     <CreateLogContainer>
                         <HeaderTwo text={"How are you feeling today?"} />
                         <CreateLogButtonContainer>
-                            {!moodLog ?
+                            {!moodLog.length ?
                                 <HeaderThree
                                     text={logMessage}
                                     textStyles={{
@@ -104,12 +105,12 @@ const MoodTracker: FunctionComponent<MoodTrackerProps> = (props: MoodTrackerProp
                                 text="Log mood"
                                 iconName="add"
                                 backgroundColor={generalColors.accent_blue}
-                                onPress={() => console.log("I've been pressed!")}
+                                onPress={handleOpenMoodModal}
                                 textStyles={{ fontWeight: "bold" }}
                             />
                         </CreateLogButtonContainer>
                     </CreateLogContainer>
-                    {moodLog ?
+                    {moodLog.length ?
                         <ContainerFlexTwo>
                         </ContainerFlexTwo>
 
