@@ -25,7 +25,7 @@ const MoodTracker: FunctionComponent<MoodTrackerProps> = (props: MoodTrackerProp
 
     const { } = props
 
-    const [moodLog, setMoodLog] = useState<LoggedEmotion[] | null>(null)
+    const [moodLog, setMoodLog] = useState<LoggedEmotion[] | []>([])
 
     const [logMessage, setLogMessage] = useState<string>("")
 
@@ -46,7 +46,7 @@ const MoodTracker: FunctionComponent<MoodTrackerProps> = (props: MoodTrackerProp
 
 
     async function handleGetMoodLog(): Promise<void> {
-        const result: LoggedEmotion[] | null = await moodTrackerHelpers.getEmotionLog()
+        const result = await moodTrackerHelpers.getMoodLog()
 
         if (!result) {
             setMoodLog(result)
@@ -59,23 +59,14 @@ const MoodTracker: FunctionComponent<MoodTrackerProps> = (props: MoodTrackerProp
     }
     async function handleAddEmotion(loggedMood: LoggedEmotion): Promise<void> {
 
-        if (!moodLog) return
+        // check that loggedMood is valid
         if (!loggedMood) return
 
+        // get updatedLog from function
+        let updatedMoodLog: LoggedEmotion[] = await moodTrackerHelpers.addEntryToMoodLog(loggedMood, moodLog)
 
-        let updatedMoodLog: LoggedEmotion[] = [
-            ...moodLog,
-            { ...loggedMood }
-        ]
 
-        setMoodLog((prev) => {
-            if (!prev) prev = []
-
-            return [
-                ...prev,
-                ...updatedMoodLog!
-            ]
-        })
+        setMoodLog(updatedMoodLog)
 
         return
     }

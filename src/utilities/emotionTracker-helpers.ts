@@ -38,15 +38,15 @@ import { Emotion, EmotionLog, LoggedEmotion } from "../interfaces";
  * 
  * }
  */
-export async function getEmotionLog(): Promise<LoggedEmotion[] | null> {
+export async function getMoodLog(): Promise<LoggedEmotion[]> {
     let result: string | null = await AsyncStorage.getItem("Emotion-Log")
     console.log("result of getEmotionLog: ", result)
 
-    if (!result) return null
+    if (!result) return []
 
-    let emotionLog: EmotionLog = JSON.parse(result)
+    let emotionLog: LoggedEmotion[] = JSON.parse(result)
     if (!emotionLog) {
-        return null
+        return []
     }
 
     return emotionLog
@@ -55,7 +55,7 @@ export async function getEmotionLog(): Promise<LoggedEmotion[] | null> {
 // store
 
 
-export async function storeEmotionLog(emotionLog: LoggedEmotion[]): Promise<boolean> {
+export async function storeMoodLog(emotionLog: LoggedEmotion[]): Promise<boolean> {
     console.log("Entered storeEmotionLog ==========")
 
     try {
@@ -76,11 +76,11 @@ export async function storeEmotionLog(emotionLog: LoggedEmotion[]): Promise<bool
  * @param emotionLog current state of the EmotionLog
  * @returns An updated EmotionLog
  */
-export async function addEntryToEmotionLog(newEntry: LoggedEmotion, emotionLog: LoggedEmotion[]): Promise<EmotionLog> {
+export async function addEntryToMoodLog(newEntry: LoggedEmotion, emotionLog: LoggedEmotion[]): Promise<LoggedEmotion[]> {
     console.log("Entered addEntryToEmotionLog() ====================")
     let updatedLog = [...emotionLog, newEntry]
 
-    storeEmotionLog(updatedLog)
+    storeMoodLog(updatedLog)
 
     return updatedLog
 
@@ -91,13 +91,13 @@ export async function addEntryToEmotionLog(newEntry: LoggedEmotion, emotionLog: 
  * @param emotionLog current state of the EmotionLog
  * @returns An updated EmotionLog
  */
-export async function updateEntryInEmotionLog(updatedEntry: LoggedEmotion, emotionLog: LoggedEmotion[]) {
+export async function updateEntryInMoodLog(updatedEntry: LoggedEmotion, emotionLog: LoggedEmotion[]) {
     console.log("Entered updateEntryInEmotionLog() ====================")
     let currentLog = [...emotionLog]
 
     let updatedLog = [...currentLog.filter((log) => log.id != updatedEntry.id), updatedEntry]
 
-    storeEmotionLog(updatedLog)
+    storeMoodLog(updatedLog)
     
     return updatedLog
 }
@@ -107,13 +107,13 @@ export async function updateEntryInEmotionLog(updatedEntry: LoggedEmotion, emoti
  * @param emotionLog current state of EmotionLog
  * @returns An updated EmotionLog
  */
-export async function removeEntryFromEmotionLog(entryToRemove: LoggedEmotion, emotionLog: LoggedEmotion[]) {
+export async function removeEntryFromMoodLog(entryToRemove: LoggedEmotion, emotionLog: LoggedEmotion[]) {
     console.log("Entered removeEntryFromEmotionLog() ====================")
     let currentLog = [...emotionLog]
 
     let updatedLog = [...currentLog.filter((log) => log.id != entryToRemove.id)]
-    
-    storeEmotionLog(updatedLog)
+
+    storeMoodLog(updatedLog)
 
     return updatedLog
 }
