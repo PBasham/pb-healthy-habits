@@ -38,6 +38,8 @@ export type EmotionLog = LoggedEmotion[] | null
 
 export interface LoggedEmotion {
     /** Time of creation */
+    id: string
+    /** Time of creation */
     createdAt: Date
     /** Last time updated. */
     updatedAt: Date

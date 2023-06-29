@@ -1,5 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { EmotionLog } from "../interfaces";
+import { Emotion, EmotionLog, LoggedEmotion } from "../interfaces";
 
 //* AsyncStorage.getItem("nameofitem") -> I need to be parsed with JSON.parse(resultOfGet)
 //* AsyncStorage.setItem("nameforitem", item)
@@ -38,7 +38,7 @@ import { EmotionLog } from "../interfaces";
  * 
  * }
  */
-export async function getEmotionLog(): Promise<EmotionLog | null> {
+export async function getEmotionLog(): Promise<LoggedEmotion[] | null> {
     let result: string | null = await AsyncStorage.getItem("Emotion-Log")
     console.log("result of getEmotionLog: ", result)
 
@@ -55,7 +55,7 @@ export async function getEmotionLog(): Promise<EmotionLog | null> {
 // store
 
 
-export async function storeEmotionLog(emotionLog: EmotionLog): Promise<boolean> {
+export async function storeEmotionLog(emotionLog: LoggedEmotion[]): Promise<boolean> {
     console.log("Entered storeEmotionLog ==========")
 
     try {
@@ -70,6 +70,50 @@ export async function storeEmotionLog(emotionLog: EmotionLog): Promise<boolean> 
     return true
 }
 
-//todo add entry to log
-//todo update entry in log
-//todo remove entry in log
+/**
+ * 
+ * @param newEntry new entry to add to the EmotionLog
+ * @param emotionLog current state of the EmotionLog
+ * @returns An updated EmotionLog
+ */
+export async function addEntryToEmotionLog(newEntry: LoggedEmotion, emotionLog: LoggedEmotion[]): Promise<EmotionLog> {
+    console.log("Entered addEntryToEmotionLog() ====================")
+    let updatedLog = [...emotionLog, newEntry]
+
+    storeEmotionLog(updatedLog)
+
+    return updatedLog
+
+}
+/**
+ * 
+ * @param updatedEntry The entry that will be udpated
+ * @param emotionLog current state of the EmotionLog
+ * @returns An updated EmotionLog
+ */
+export async function updateEntryInEmotionLog(updatedEntry: LoggedEmotion, emotionLog: LoggedEmotion[]) {
+    console.log("Entered updateEntryInEmotionLog() ====================")
+    let currentLog = [...emotionLog]
+
+    let updatedLog = [...currentLog.filter((log) => log.id != updatedEntry.id), updatedEntry]
+
+    storeEmotionLog(updatedLog)
+    
+    return updatedLog
+}
+/**
+ * 
+ * @param entryToRemove Entry that will be removed from EmotionLog
+ * @param emotionLog current state of EmotionLog
+ * @returns An updated EmotionLog
+ */
+export async function removeEntryFromEmotionLog(entryToRemove: LoggedEmotion, emotionLog: LoggedEmotion[]) {
+    console.log("Entered removeEntryFromEmotionLog() ====================")
+    let currentLog = [...emotionLog]
+
+    let updatedLog = [...currentLog.filter((log) => log.id != entryToRemove.id)]
+    
+    storeEmotionLog(updatedLog)
+
+    return updatedLog
+}
