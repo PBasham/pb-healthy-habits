@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useEffect, useState } from "react";
-import { Button, Modal, StyleSheet, Text, View } from "react-native";
+import { Button, Modal, StyleSheet, Text, TextInput, View } from "react-native";
 import styled from "styled-components/native";
 
 // components --------------------------------------------------
@@ -73,9 +73,17 @@ const MoodLogModal: FunctionComponent<MoodLogModalProps> = (props: MoodLogModalP
                     </SelectEmotionContainer>
                     <FeelingSummaryContainer>
                         <HeaderThree text="Write a little about why you might be feeling this." />
+                        <TextInput
+                            // value={}
+                            multiline
+                            placeholder="I feel...  I was..."
+                            // style={[styles.input, styles.entry]}
+                            onChangeText={(text) => console.log("Text has changed!: ", text)}
+                        />
                     </FeelingSummaryContainer>
                 </LoggedMoodModalContainer>
             </Modal>
+            
         </>
     )
 }

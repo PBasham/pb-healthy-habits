@@ -26,6 +26,9 @@ interface TopBarProps {
     backIconColor?: string
     /** Color for dots icons. */
     dotsIconColor?: string
+    
+    /** Direction for arrow in back button */
+    backBtnDirection?: "back" | "forward" | "up" | "down"
 
     /** Color for background of TopBar. */
     backgroundColor?: string
@@ -56,6 +59,8 @@ const TopBar: FunctionComponent<TopBarProps> = (props: TopBarProps) => {
         iconsColor = textColors.dark_transparent,
         backIconColor,
         dotsIconColor,
+
+        backBtnDirection = "back",
 
         backgroundColor,
         bottomBorderColor,
@@ -133,7 +138,7 @@ const TopBar: FunctionComponent<TopBarProps> = (props: TopBarProps) => {
                     {hasBackButton ?
                         <BackBtnContainer>
                             <Ionicons
-                                name="chevron-back-outline"
+                                name={`chevron-${backBtnDirection}-outline`}
                                 size={36}
                                 color={backIconColor || iconsColor}
                                 onPress={onBackPress}
