@@ -35,7 +35,21 @@ const Dropdown: FunctionComponent<DropdownProps> = (props: DropdownProps) => {
         color: ""
     })
 
+    const handleSelectEmotion = (emotionDetail: EmotionDetail) => {
 
+        let name: string
+        if (!emotionDetail.emotion.length) name = ""
+        else if (emotionDetail.emotion.length > 1) name = `${emotionDetail.emotion.charAt(0).toUpperCase()}${emotionDetail.emotion.slice(1)}`
+        else name = `${emotionDetail.emotion.charAt(0).toUpperCase()}`
+
+        setSelectedEmotion(() => {
+            return {
+                emotion: name,
+                color: emotionDetail.color
+            }
+        })
+        setIsOptionsVisible(false)
+    }
 
     const [isOptionsVisible, setIsOptionsVisible] = useState(false)
 
@@ -54,9 +68,11 @@ const Dropdown: FunctionComponent<DropdownProps> = (props: DropdownProps) => {
         flex: 1;
         justify-content: center;
         align-items: center;
+
+        background-color: ${selectedEmotion.emotion ? selectedEmotion.color : ""};
         border-color: ${colors.generalColors.dark_transparent};
         border-width: 1px;
-        background-color: ${selectedEmotion.emotion ? selectedEmotion.color : ""};
+
     `
     const DropDownButton = styled.View`
         justify-content: center;
@@ -65,8 +81,8 @@ const Dropdown: FunctionComponent<DropdownProps> = (props: DropdownProps) => {
         /* height: 100%; */
         margin-left: auto;
         background-color: ${colors.generalColors.secondary};
+        border-color: ${colors.generalColors.dark_transparent};
         border-width: 1px;
-        border-color: ${colors.generalColors.secondary};
     `
 
 
@@ -110,7 +126,10 @@ const Dropdown: FunctionComponent<DropdownProps> = (props: DropdownProps) => {
         <>
             <DropDownContainer onPress={() => setIsOptionsVisible(!isOptionsVisible)}>
                 <DropDownSelected>
-                    <HeaderThree text={`${selectedEmotion.emotion ? selectedEmotion.emotion : "Select Emotion"}`} />
+                    <HeaderThree
+                        text={`${selectedEmotion.emotion ? selectedEmotion.emotion : "Select Emotion"}`}
+                        textStyles={{color: "white"}}
+                    />
                 </DropDownSelected>
 
                 <DropDownButton>
@@ -144,7 +163,7 @@ const Dropdown: FunctionComponent<DropdownProps> = (props: DropdownProps) => {
 
 
                                     return <DropDownOption key={idx} style={{ backgroundColor: emotion.color }} >
-                                        <DropDownOptionInner>
+                                        <DropDownOptionInner onPress={() => handleSelectEmotion(emotion)} >
                                             <HeaderThree text={name} />
                                         </DropDownOptionInner>
                                     </DropDownOption>

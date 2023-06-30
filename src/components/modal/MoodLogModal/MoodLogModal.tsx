@@ -2,6 +2,7 @@ import React, { FunctionComponent, useEffect, useState } from "react";
 import { Button, Modal, StyleSheet, Text, TextInput, View } from "react-native";
 import styled from "styled-components/native";
 
+import DateTimePicker from '@react-native-community/datetimepicker';
 // components --------------------------------------------------
 import { Container } from "../../shared";
 import { HeaderOne, HeaderTwo, HeaderThree, BodyText, SubText } from "../../ui/text";
@@ -14,7 +15,8 @@ import { ContainerFlexTwo, ScreenWidth } from "../../../components/shared/shared
 import { SafeAreaView } from "react-native-safe-area-context";
 import { LoggedEmotion } from "../../../interfaces";
 import { EmotionWheel } from "../../../data/Emotions";
-import Dropdown from "../../ui/Dropdowns/Dropdown";
+import { Dropdown } from "../../../components/ui";
+import { formatDate, formatDateNamed, getDate } from "../../../utilities/date-helpers";
 
 
 interface MoodLogModalProps {
@@ -39,7 +41,6 @@ const MoodLogModal: FunctionComponent<MoodLogModalProps> = (props: MoodLogModalP
         `
 
     const TrackedTimeContainer = styled.View`
-        flex-direction: row;
         gap: 10px;
         width: 100%;
     `
@@ -51,9 +52,49 @@ const MoodLogModal: FunctionComponent<MoodLogModalProps> = (props: MoodLogModalP
         
     `
 
+    const [log, setLog] = useState<LoggedEmotion>(() => {
+        
+        // let currentDate = new Date().get
+        
+        return {
+            id: existingLog?.id || Date.now(),
+            
+            createdAt: existingLog?.createdAt ?? getDate(),
+            updatedAt: existingLog?.updatedAt ?? getDate(),
+            timeTracked: existingLog?.timeTracked ?? new Date(),
+            
+            emotion: {
+                emotion: "",
+                color: "",
+            },
+            
+            feelingSummary: "",
+            
+            
+        }
+    })
+
+
+    const [isDatePickerOpen, setIsDatePickerOpen] = useState(false)
+
+    function handleOpenDatePicker() { setIsDatePickerOpen(true) }
+    function handleCloseDatePicker() { setIsDatePickerOpen(false) }
+
     useEffect(() => {
 
     }, [])
+
+
+
+    const InputContainer = styled.Pressable`
+
+        justify-content: center;
+        align-items: center;
+        
+        height: 50px;
+        
+        border: 1px solid ${generalColors.dark_transparent};
+    `
 
     return (
         <>
@@ -65,7 +106,12 @@ const MoodLogModal: FunctionComponent<MoodLogModalProps> = (props: MoodLogModalP
                 />
                 <LoggedMoodModalContainer>
                     <TrackedTimeContainer>
-                        <HeaderThree text="Time Tracked" textAlignment="left" />
+                        <HeaderThree text="Time Tracked" />
+                        <InputContainer onPress={handleOpenDatePicker} >
+                            <HeaderThree text={formatDate(log.timeTracked)} />
+                        </InputContainer>
+                        {/* <HeaderThree text={`${log.timeTracked}`} /> */}
+                        
                     </TrackedTimeContainer>
                     <SelectEmotionContainer>
                         <HeaderThree text="What are you feeling?" />
@@ -82,6 +128,15 @@ const MoodLogModal: FunctionComponent<MoodLogModalProps> = (props: MoodLogModalP
                         />
                     </FeelingSummaryContainer>
                 </LoggedMoodModalContainer>
+                {isDatePickerOpen ?
+                <DateTimePicker
+                    testID="datePicker"
+                    value={log.timeTracked}
+                    mode="date"
+                    onChange={(event, selectedDate) => console.log(selectedDate)}
+                />
+                :
+                null}
             </Modal>
             
         </>

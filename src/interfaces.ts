@@ -37,15 +37,15 @@ export interface JournalEntry {
 
 export interface LoggedEmotion {
     /** Time of creation */
-    id: string
+    id: number 
     /** Time of creation */
-    createdAt: Date
+    createdAt: Date 
     /** Last time updated. */
-    updatedAt: Date
+    updatedAt: Date 
     /** Time this emotion happened/was tracked */
-    timeTracked: Date
+    timeTracked: Date 
     // Emotion user is feeling
-    emotion: Emotion | UserEmotion
+    emotion: EmotionDetail 
     /** Short message for what was happening or why you might be feeling this way. */
     feelingSummary?: string
 }

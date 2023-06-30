@@ -1,1 +1,1 @@
-export { default } from "./MoodLogModal"
+export { default as MoodLogModal } from "./MoodLogModal"
