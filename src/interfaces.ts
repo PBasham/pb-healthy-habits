@@ -58,10 +58,10 @@ export type Emotion = "happy" | "caring" | "greatful" | "excited" | "loved" | "R
 export type UserEmotion = string 
 // object used to connect an emotion with a color.
 export interface EmotionDetail {
-    emotionName: Emotion
+    emotion: Emotion
     color?: string
 }
-export type EmotionDetails = EmotionDetail[]
+
 // security
 export type PasswordType = "password" | "pin" | undefined
 // organization

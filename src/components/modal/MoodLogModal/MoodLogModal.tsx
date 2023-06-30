@@ -14,6 +14,7 @@ import { ContainerFlexTwo, ScreenWidth } from "../../../components/shared/shared
 import { SafeAreaView } from "react-native-safe-area-context";
 import { LoggedEmotion } from "../../../interfaces";
 import { EmotionWheel } from "../../../data/Emotions";
+import Dropdown from "../../ui/Dropdowns/Dropdown";
 
 
 interface MoodLogModalProps {
@@ -35,13 +36,16 @@ const MoodLogModal: FunctionComponent<MoodLogModalProps> = (props: MoodLogModalP
         gap: 40px;
         padding: 20px;
         
-    `
+        `
 
     const TrackedTimeContainer = styled.View`
-        
+        flex-direction: row;
+        gap: 10px;
+        width: 100%;
     `
     const SelectEmotionContainer = styled.View`
-        
+        gap: 10px;
+        width: 100%;
     `
     const FeelingSummaryContainer = styled.View`
         
@@ -59,19 +63,18 @@ const MoodLogModal: FunctionComponent<MoodLogModalProps> = (props: MoodLogModalP
                     hasBackButton
                     onBackPress={closeModal}
                 />
-                
-                {/* <LoggedMoodModalContainer>
+                <LoggedMoodModalContainer>
                     <TrackedTimeContainer>
-                        <HeaderThree text="Time Tracked:" textAlignment="left" />
-                        
+                        <HeaderThree text="Time Tracked" textAlignment="left" />
                     </TrackedTimeContainer>
                     <SelectEmotionContainer>
-                        <HeaderThree text="What are you feeling?" textAlignment="left" />
+                        <HeaderThree text="What are you feeling?" />
+                        <Dropdown options={EmotionWheel} />
                     </SelectEmotionContainer>
                     <FeelingSummaryContainer>
-                        <HeaderThree text="Write a little about why you might be feeling this." textAlignment="left" />
+                        <HeaderThree text="Write a little about why you might be feeling this." />
                     </FeelingSummaryContainer>
-                </LoggedMoodModalContainer> */}
+                </LoggedMoodModalContainer>
             </Modal>
         </>
     )

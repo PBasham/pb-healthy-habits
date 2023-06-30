@@ -1,9 +1,9 @@
-import { Emotion } from "../interfaces";
+import { Emotion, EmotionDetail } from "../interfaces";
 
 export const arrEmotions: Emotion[] = ["happy", "caring", "greatful", "excited", "loved", "Respected", "valued", "accepted", "confident", "brave", "hopeful", "powerful", "playful", "creative", "curious", "affectionate", "embarrassed", "guilty", "excluded", "ashamed", "angry", "annoyed", "jealous", "bored", "scared", "overwhelmed", "powerless", "anxious", "sad", "disappointed", "hurt", "lonely"]
 
 
-export const EmotionWheel: { emotion: Emotion, color: string }[] = [
+export const EmotionWheel:EmotionDetail[] = [
     {
         emotion: "happy",
         color: "rgb(247,137,198)"
