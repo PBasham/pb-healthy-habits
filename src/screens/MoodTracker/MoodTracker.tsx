@@ -2,7 +2,7 @@ import React, { FunctionComponent, useEffect, useState } from "react";
 import { Button, StyleSheet, Text, View } from "react-native";
 import styled from "styled-components/native";
 
-import * as moodTrackerHelpers from "../../utilities/emotionTracker-helpers"
+import * as logHelpers from "../../utilities/moodLog-helpers"
 
 // components --------------------------------------------------
 import { Container } from "../../components/shared";
@@ -47,7 +47,7 @@ const MoodTracker: FunctionComponent<MoodTrackerProps> = (props: MoodTrackerProp
 
 
     async function handleGetMoodLog(): Promise<void> {
-        const result = await moodTrackerHelpers.getMoodLog()
+        const result = await logHelpers.getMoodLog()
         console.log("Result from handleGetMoodLog(): ", result)
         if (!result.length) {
             setMoodLog(result)
@@ -58,15 +58,15 @@ const MoodTracker: FunctionComponent<MoodTrackerProps> = (props: MoodTrackerProp
 
         return
     }
-    async function handleAddMoodToLog(loggedMood: LoggedEmotion): Promise<void> {
+    async function handleAddMoodToLog(loggedMood: LoggedEmotion | null): Promise<void> {
 
         // check that loggedMood is valid
         if (!loggedMood) return
 
         // get updatedLog from function
-        let updatedMoodLog: LoggedEmotion[] = await moodTrackerHelpers.addEntryToMoodLog(loggedMood, moodLog)
+        let updatedMoodLog: LoggedEmotion[] = await logHelpers.addEntryToMoodLog(loggedMood, moodLog)
 
-
+        console.log("UpdatedMoodLog: ", updatedMoodLog)
         setMoodLog(updatedMoodLog)
 
         return
@@ -90,7 +90,11 @@ const MoodTracker: FunctionComponent<MoodTrackerProps> = (props: MoodTrackerProp
 
     return (
         <>
-            <MoodLogModal visible={isMoodLogModalVisible} closeModal={handleCloseMoodModal} />
+            <MoodLogModal
+                visible={isMoodLogModalVisible}
+                closeModal={handleCloseMoodModal}
+                handleAddMoodToLog={handleAddMoodToLog}
+            />
             <SafeAreaView edges={['top']} children={<TopBar label="Mood Tracker" />} />
             <SafeAreaView mode="padding" style={{ flex: 1 }} edges={['left', 'right']} >
                 <MoodTrackerContainer>

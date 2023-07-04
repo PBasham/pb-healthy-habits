@@ -4,6 +4,7 @@ export const generalColors = {
 
     dark_transparent: "rgba(0,0,0,.5)",
     light_transparent: "rgba(255,255,255,.4)",
+    lightGray_transparent: "rgba(175,175,175,.1)",
 
     primary: "#eafffe",
     // primary: "#C9F1EA",

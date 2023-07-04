@@ -10,44 +10,42 @@ import { HeaderOne, HeaderTwo, HeaderThree, BodyText, SubText } from "../../ui/t
 import { Ionicons } from '@expo/vector-icons';
 // colors
 import { colors, generalColors, textColors } from "../../../assets";
-import { StandardButton, TopBar } from "../../../components/ui";
-import { ContainerFlexTwo, ScreenHeight, ScreenWidth } from "../../../components/shared/shared";
+import { TopBar } from "../../../components/ui";
+import { ScreenHeight, ScreenWidth } from "../../../components/shared/shared";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { EmotionDetail } from "../../../interfaces";
-import { EmotionWheel } from "../../../data/Emotions";
-import { TouchableOpacity, TouchableWithoutFeedback } from "react-native-gesture-handler";
 
 
 
 interface DropdownProps {
     options: EmotionDetail[]
-
+    selectedEmotion: EmotionDetail | null
+    onChangeSelection: (selectedEmotion: EmotionDetail) => void
 }
 
 
 const Dropdown: FunctionComponent<DropdownProps> = (props: DropdownProps) => {
 
-    const { options } = props
+    const { options, selectedEmotion, onChangeSelection } = props
 
 
-    const [selectedEmotion, setSelectedEmotion] = useState<EmotionDetail>({
-        emotion: "",
-        color: ""
-    })
+    // const [selectedEmotion, setSelectedEmotion] = useState<EmotionDetail | null>(null)
 
     const handleSelectEmotion = (emotionDetail: EmotionDetail) => {
-
+        console.log(emotionDetail)
         let name: string
         if (!emotionDetail.emotion.length) name = ""
         else if (emotionDetail.emotion.length > 1) name = `${emotionDetail.emotion.charAt(0).toUpperCase()}${emotionDetail.emotion.slice(1)}`
         else name = `${emotionDetail.emotion.charAt(0).toUpperCase()}`
 
-        setSelectedEmotion(() => {
-            return {
-                emotion: name,
-                color: emotionDetail.color
-            }
-        })
+
+        const updatedEmotionDetail = {
+            emotion: name,
+            color: emotionDetail.color
+        }
+        console.log(updatedEmotionDetail)
+        // setSelectedEmotion(() => { return updatedEmotionDetail })
+        onChangeSelection(updatedEmotionDetail)
         setIsOptionsVisible(false)
     }
 
@@ -69,7 +67,7 @@ const Dropdown: FunctionComponent<DropdownProps> = (props: DropdownProps) => {
         justify-content: center;
         align-items: center;
 
-        background-color: ${selectedEmotion.emotion ? selectedEmotion.color : ""};
+        background-color: ${selectedEmotion?.emotion ? selectedEmotion.color : generalColors.lightGray_transparent};
         border-color: ${colors.generalColors.dark_transparent};
         border-width: 1px;
 
@@ -127,8 +125,8 @@ const Dropdown: FunctionComponent<DropdownProps> = (props: DropdownProps) => {
             <DropDownContainer onPress={() => setIsOptionsVisible(!isOptionsVisible)}>
                 <DropDownSelected>
                     <HeaderThree
-                        text={`${selectedEmotion.emotion ? selectedEmotion.emotion : "Select Emotion"}`}
-                        textStyles={{color: "white"}}
+                        text={`${selectedEmotion?.emotion ? selectedEmotion.emotion : "Select Emotion"}`}
+                        textStyles={{color: selectedEmotion?.emotion ? "white" : "black"}}
                     />
                 </DropDownSelected>
 

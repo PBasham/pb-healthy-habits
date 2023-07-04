@@ -43,11 +43,11 @@ export interface LoggedEmotion {
     /** Last time updated. */
     updatedAt: Date 
     /** Time this emotion happened/was tracked */
-    timeTracked: Date 
+    dateTracked: Date 
     // Emotion user is feeling
-    emotion: EmotionDetail 
+    emotion: EmotionDetail | null
     /** Short message for what was happening or why you might be feeling this way. */
-    feelingSummary?: string
+    feelingSummary?: string | null
 }
 
 //* Misc types --------------------------------------------------
