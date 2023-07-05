@@ -99,6 +99,7 @@ const StandardButton: FunctionComponent<StandardButtonProps> = (props: StandardB
         <StandardButtonContainer
             onPress={onPress}
             style={buttonStyles}
+            
         >
             {iconName ?
                 <Ionicons
@@ -110,7 +111,9 @@ const StandardButton: FunctionComponent<StandardButtonProps> = (props: StandardB
                 />
                 : null
             }
+            {text?.length ?
             <StyledButtonText style={textStyles} >{text}</StyledButtonText>
+            : null }
         </StandardButtonContainer>
     )
 }

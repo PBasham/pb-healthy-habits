@@ -40,7 +40,7 @@ import { Emotion, LoggedEmotion } from "../interfaces";
  */
 export async function getMoodLog(): Promise<LoggedEmotion[]> {
     let result: string | null = await AsyncStorage.getItem("Emotion-Log")
-    console.log("result of getEmotionLog: ", result)
+    // console.log("result of getEmotionLog: ", result)
 
     if (!result) return []
 

@@ -48,7 +48,7 @@ const MoodTracker: FunctionComponent<MoodTrackerProps> = (props: MoodTrackerProp
 
     async function handleGetMoodLog(): Promise<void> {
         const result = await logHelpers.getMoodLog()
-        console.log("Result from handleGetMoodLog(): ", result)
+        console.log("Result from handleGetMoodLog(): ", result.length)
         if (!result.length) {
             setMoodLog(result)
             setLogMessage("You haven't logged anything for today.")
@@ -98,8 +98,8 @@ const MoodTracker: FunctionComponent<MoodTrackerProps> = (props: MoodTrackerProp
             <SafeAreaView edges={['top']} children={<TopBar label="Mood Tracker" />} />
             <SafeAreaView mode="padding" style={{ flex: 1 }} edges={['left', 'right']} >
                 <MoodTrackerContainer>
-                    <CreateLogContainer>
-                        <HeaderTwo text={"How are you feeling today?"} />
+                    <ContainerFlexTwo>
+                        <HeaderTwo text={"How are you feeling today overall?"} />
                         <CreateLogButtonContainer>
                             {!moodLog.length ?
                                 <HeaderThree
@@ -113,21 +113,34 @@ const MoodTracker: FunctionComponent<MoodTrackerProps> = (props: MoodTrackerProp
                                 : null
                             }
                             <StandardButton
-                                text="Log mood"
+                                text="Log overall day"
                                 iconName="add"
                                 backgroundColor={generalColors.accent_blue}
-                                onPress={handleOpenMoodModal}
+                                // onPress={handleOpenMoodModal}
                                 textStyles={{ fontWeight: "bold" }}
                             />
                         </CreateLogButtonContainer>
-                    </CreateLogContainer>
+                    </ContainerFlexTwo>
+
                     {moodLog.length ?
                         <ContainerFlexTwo>
+                            <HeaderTwo text="Today's log" />
                         </ContainerFlexTwo>
 
                         :
-                        null
+                        // null
+                        <HeaderThree  text="Nothing in log"/>
                     }
+                    <StandardButton
+                        text={`${moodLog.length ? "" : "Log mood"}`}
+                        iconName="add"
+                        backgroundColor={generalColors.accent_blue}
+                        onPress={handleOpenMoodModal}
+                        buttonStyles={{
+                                // alignSelf: "flex-end", 
+                            }}
+                        textStyles={{ fontWeight: "bold" }}
+                    />
                 </MoodTrackerContainer>
             </SafeAreaView>
         </>
