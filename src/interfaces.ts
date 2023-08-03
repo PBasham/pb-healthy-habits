@@ -50,6 +50,19 @@ export interface LoggedEmotion {
     feelingSummary?: string | null
 }
 
+export interface LoggedOverallEmotion {
+    /** Time of creation */
+    id: number 
+    /** Time of creation */
+    createdAt: Date 
+    /** Last time updated. */
+    updatedAt: Date 
+    /** Time this emotion happened/was tracked */
+    dateTracked: Date 
+    // Emotion user is feeling
+    emotion: EmotionDetail | null
+}
+
 //* Misc types --------------------------------------------------
 // Emotion
 export type Emotion = "happy" | "caring" | "greatful" | "excited" | "loved" | "Respected" | "valued" | "accepted" | "confident" | "brave" | "hopeful" | "powerful" | "playful" | "creative" | "curious" | "affectionate" | "embarrassed" | "guilty" | "excluded" | "ashamed" | "angry" | "annoyed" | "jealous" | "bored" | "scared" | "overwhelmed" | "powerless" | "anxious" | "sad" | "disappointed" | "hurt" | "lonely" | UserEmotion

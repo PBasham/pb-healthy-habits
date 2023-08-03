@@ -13,9 +13,22 @@ export const formatDate = (date: Date | undefined): string => {
 }
 
 export const formatDateNamed = (date: Date | undefined): string => {
-    if (!date) return ""
+    console.log("Entered formatDateNamed() =====")
 
-    const mm = (date.getMonth())
+    if (!date) return ""
+    console.log("Typeof incoming date: ", typeof date)
+
+    
+
+    if (typeof date == "string") {
+        console.log("Date is a string")
+        date = new Date(date)
+    }
+    
+    
+    
+    console.log(`Incoming date: ${date}`)
+    const mm = date.getMonth()
     const dd = date.getDay()
     const yyyy = date.getFullYear()
 
@@ -23,6 +36,34 @@ export const formatDateNamed = (date: Date | undefined): string => {
     let monthName = monthNames[mm]
 
     return `${dayName}, ${monthName} ${yyyy}`
+}
+
+export const formatDateNamedAndTime = (date: Date | undefined): string => {
+    console.log("Entered formatDateNamedAndTime() =====")
+
+    if (!date) return ""
+    console.log("Typeof incoming date: ", typeof date)
+
+    
+
+    if (typeof date == "string") {
+        console.log("Date is a string")
+        date = new Date(date)
+    }
+    
+    
+    
+    console.log(`Incoming date: ${date}`)
+    const mm = date.getMonth()
+    const dd = date.getDay()
+    const yyyy = date.getFullYear()
+
+    let dayName = dayNames[dd]
+    let monthName = monthNames[mm]
+
+    const time = converTimeToAMPM(date)
+
+    return `${dayName}, ${monthName} ${yyyy} ${time}`
 }
 
 export const getNamedDayMonthYear = (): string => {
