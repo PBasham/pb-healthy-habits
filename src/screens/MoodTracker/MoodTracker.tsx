@@ -110,16 +110,11 @@ const MoodTracker: FunctionComponent<MoodTrackerProps> = (props: MoodTrackerProp
         console.log("Result from handleGetMoodLog(): ", result.length)
         if (!result.length) {
             setLogMessage("You haven't logged anything for today.")
-            console.log("CHECK HERE")
-            console.log("result: ", result)
-            setMoodLog(result)
         } else {
             setLogMessage("You have stuff!")
-            console.log("CHECK HERE 2")
-            console.log("result: ", result)
-            setMoodLog(result)
         }
-
+        setMoodLog(result)
+        
         return
     }
     async function handleAddMoodToLog(loggedMood: LoggedEmotion | null): Promise<void> {
@@ -152,7 +147,7 @@ const MoodTracker: FunctionComponent<MoodTrackerProps> = (props: MoodTrackerProp
 
     useEffect(() => { 
         handleGetMoodLog() 
-        // handleGetOverallMood()
+        handleGetOverallMood()
     }, [])
 
     return (
@@ -162,6 +157,7 @@ const MoodTracker: FunctionComponent<MoodTrackerProps> = (props: MoodTrackerProp
                 closeModal={handleCloseMoodModal}
                 handleAddMoodToLog={handleAddMoodToLog}
             />
+            {/* //TODO - Create Modal for OverallMood and associated functions, ie: open, close, ect. */}
             <SafeAreaView edges={['top']} children={<TopBar label="Mood Tracker" />} />
             <SafeAreaView mode="padding" style={{ flex: 1 }} edges={['left', 'right']} >
                 <MoodTrackerContainer>
@@ -169,6 +165,7 @@ const MoodTracker: FunctionComponent<MoodTrackerProps> = (props: MoodTrackerProp
 
                         <HeaderTwo
                             text={"How are you feeling today?"}
+                            textAlignment="left"
                             textColor={textColors.dark_transparent}
                             textStyles={{
                                 marginTop: 10,

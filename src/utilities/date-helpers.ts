@@ -11,23 +11,26 @@ export const formatDate = (date: Date | undefined): string => {
     const yyyy = date.getFullYear()
     return `${mm}/${dd}/${yyyy}`
 }
+export const formatDateWithTime = (date: Date | undefined): string => {
+    if (!date) return ""
+    const mm = (date.getMonth() + 1).toString().padStart(2, "0")
+    const dd = date.getDate().toString().padStart(2, "0")
+    const yyyy = date.getFullYear()
+
+    const time = converTimeToAMPM(date)
+    return `${mm}/${dd}/${yyyy} ${time}`
+}
 
 export const formatDateNamed = (date: Date | undefined): string => {
     console.log("Entered formatDateNamed() =====")
 
     if (!date) return ""
-    console.log("Typeof incoming date: ", typeof date)
-
-    
 
     if (typeof date == "string") {
         console.log("Date is a string")
         date = new Date(date)
     }
     
-    
-    
-    console.log(`Incoming date: ${date}`)
     const mm = date.getMonth()
     const dd = date.getDay()
     const yyyy = date.getFullYear()
@@ -42,18 +45,12 @@ export const formatDateNamedAndTime = (date: Date | undefined): string => {
     console.log("Entered formatDateNamedAndTime() =====")
 
     if (!date) return ""
-    console.log("Typeof incoming date: ", typeof date)
-
-    
 
     if (typeof date == "string") {
         console.log("Date is a string")
         date = new Date(date)
     }
     
-    
-    
-    console.log(`Incoming date: ${date}`)
     const mm = date.getMonth()
     const dd = date.getDay()
     const yyyy = date.getFullYear()
