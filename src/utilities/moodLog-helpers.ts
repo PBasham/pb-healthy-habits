@@ -103,7 +103,7 @@ export async function updateEntryInMoodLog(updatedEntry: LoggedEmotion, emotionL
     let updatedLog = [...currentLog.filter((log) => log.id != updatedEntry.id), updatedEntry]
 
     storeMoodLog(updatedLog)
-    
+
     return updatedLog
 }
 /**
@@ -156,22 +156,21 @@ export async function removeEntryFromMoodLog(entryToRemove: LoggedEmotion, emoti
 export async function getOverallMood(): Promise<LoggedOverallEmotion | null> {
     console.log("Entered getOverallMood() =====")
     let result: string | null = await AsyncStorage.getItem("Overall-Mood-Log")
-    
+
     if (!result) return null
 
     let overallMoodLog: LoggedOverallEmotion[] = JSON.parse(result)
 
     console.log("overallMoodLog: ", overallMoodLog)
+
     
-    let filteredOverallMoodLog: LoggedOverallEmotion[] = overallMoodLog.filter((overallMood) => {
-        if (dateHelpers.formatDate(overallMood.dateTracked) == dateHelpers.formatDate(dateHelpers.getDate())) {
-            return overallMood
-        }
-    })
+
+    let filteredOverallMoodLog: LoggedOverallEmotion[] = await overallMoodLog.filter((log) => dateHelpers.matchesToday(log.dateTracked))
+    
     console.log("filteredOverallMoodLog: ", filteredOverallMoodLog)
-    
-    if(!filteredOverallMoodLog || filteredOverallMoodLog.length) return null
-    
+
+    if (!filteredOverallMoodLog || !filteredOverallMoodLog.length) return null
+
     const todaysOverallMood: LoggedOverallEmotion = filteredOverallMoodLog[0]
     console.log("todaysOverallMood: ", todaysOverallMood)
 
@@ -192,27 +191,33 @@ export async function storeOverallMood(overallMood: LoggedOverallEmotion): Promi
     //TODO - Add incoming Overall Mood to the list of Overall mood logs.
     //todo 1. Get overall mood log.
     const result: string | null = await AsyncStorage.getItem("Overall-Mood-Log")
-    
-    if (!result) return false
 
-    const overallMoodLog: LoggedOverallEmotion[] = JSON.parse(result)
+    let overallMoodLog: LoggedOverallEmotion[] = []
+
+    if (result) overallMoodLog = JSON.parse(result)
+
+
+
     console.log("overallMoodLog: ", overallMoodLog)
+    //* I did it with the format function so that it would ignore time since this is the mood for the overall day.
     //todo 2. filter current overallMoodLog without log for today.
     //todo 3. add incoing overall mood to log.
-    const updatedOverallMoodLog: LoggedOverallEmotion[] = [
-        ...overallMoodLog.filter((log) => {
-            if ( dateHelpers.formatDate(log.dateTracked) !== dateHelpers.formatDate(overallMood.dateTracked)) return log
-        }),
+    let updatedOverallMoodLog: LoggedOverallEmotion[] = overallMoodLog.filter((log) => !dateHelpers.matchesToday(log.dateTracked))
+
+    updatedOverallMoodLog = [
+        ...updatedOverallMoodLog,
         overallMood
     ]
+
     console.log("updatedOverallMoodLog: ", updatedOverallMoodLog)
     //todo 4. store new overall mood log.
     try {
+        console.log("Trying to store Overall-Mood-Log")
         let result = await AsyncStorage.setItem("Overall-Mood-Log", JSON.stringify(updatedOverallMoodLog))
         console.log("result: ", result)
     } catch (error) {
-        console.log("Set for Emotion-Log failed.")
-        console.log(error)
+        console.log("Set for Overall-Mood-Log failed.")
+        console.log("With Error ", error)
         return false
     }
 
@@ -229,7 +234,7 @@ export async function storeOverallMood(overallMood: LoggedOverallEmotion): Promi
 export async function removeOverallMoodFromOverallMoodLog(entryToRemove: LoggedOverallEmotion): Promise<boolean> {
     console.log("Entered removeOverallMoodFromOverallMoodLog() ====================")
     let result: string | null = await AsyncStorage.getItem("Overall-Mood-Log")
-    
+
     if (!result) return false
 
     let overallMoodLog: LoggedOverallEmotion[] = JSON.parse(result)
@@ -246,7 +251,7 @@ export async function removeOverallMoodFromOverallMoodLog(entryToRemove: LoggedO
         console.log(error)
         return false
     }
-    
+
 
     return true
 }

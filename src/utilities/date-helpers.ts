@@ -4,11 +4,29 @@ const monthNames = ["January", "February", "March", "April", "May", "June",
 const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
 
 export const getDate = (): Date => { return new Date() }
+
+export const matchesToday = (date: string | Date | number) => {
+
+    let dateTracked = new Date(date)
+    const todaysDate = new Date()
+
+    const dateMatch = dateTracked.getDate() == todaysDate.getDate()
+    const monthMatch = dateTracked.getMonth() == todaysDate.getMonth()
+    const yearMatch = dateTracked.getFullYear() == todaysDate.getFullYear()
+
+    return dateMatch && monthMatch && yearMatch
+}
+
 export const formatDate = (date: Date | undefined): string => {
-    if (!date) return ""
+    console.log("Entered formatDate() =====")
+
+    if (!date || date == undefined) return ""
+
+
     const mm = (date.getMonth() + 1).toString().padStart(2, "0")
     const dd = date.getDate().toString().padStart(2, "0")
     const yyyy = date.getFullYear()
+    
     return `${mm}/${dd}/${yyyy}`
 }
 export const formatDateWithTime = (date: Date | undefined): string => {
@@ -26,10 +44,7 @@ export const formatDateNamed = (date: Date | undefined): string => {
 
     if (!date) return ""
 
-    if (typeof date == "string") {
-        console.log("Date is a string")
-        date = new Date(date)
-    }
+    if (typeof date == "string") date = new Date(date)
     
     const mm = date.getMonth()
     const dd = date.getDay()
@@ -46,10 +61,7 @@ export const formatDateNamedAndTime = (date: Date | undefined): string => {
 
     if (!date) return ""
 
-    if (typeof date == "string") {
-        console.log("Date is a string")
-        date = new Date(date)
-    }
+    if (typeof date == "string") date = new Date(date)
     
     const mm = date.getMonth()
     const dd = date.getDay()

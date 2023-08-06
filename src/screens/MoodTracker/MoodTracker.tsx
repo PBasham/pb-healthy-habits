@@ -8,15 +8,17 @@ import * as datehelpers from "../../utilities/date-helpers"
 // components --------------------------------------------------
 import { Container } from "../../components/shared";
 import { HeaderOne, HeaderTwo, HeaderThree, BodyText, SubText } from "../../components/ui/text";
+import { LoggedEmotion, LoggedOverallEmotion } from "../../interfaces";
+import { MoodLogModal, OverallMoodModal } from "../../components/modal";
+
+import { StandardButton, TopBar } from "../../components/ui";
+
+import { ContainerFlexTwo, ScreenWidth } from "../../components/shared/shared";
 
 // misc --------------------------------------------------
 // colors
 import { generalColors, textColors } from "../../assets";
-import { StandardButton, TopBar } from "../../components/ui";
-import { ContainerFlexTwo, ScreenWidth } from "../../components/shared/shared";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { LoggedEmotion, LoggedOverallEmotion } from "../../interfaces";
-import MoodLogModal from "../../components/modal/MoodLogModal/MoodLogModal";
 
 interface MoodTrackerProps {
 
@@ -97,7 +99,31 @@ const MoodTracker: FunctionComponent<MoodTrackerProps> = (props: MoodTrackerProp
         return
     }
 
+    const handleUpdateOverallMood = async (overallMood: LoggedOverallEmotion | null): Promise<void> => {
+        console.log("Entered handleUpdateOverallMood() ===== with: ", overallMood)
+        if (!overallMood) return;
+
+        let result = await logHelpers.storeOverallMood(overallMood);
+        console.log(`Storing overallMood was successful: ${result}`)
+        if (!result) return; //TODO - set up popup message saying there was an error.
+        setOverallMood(overallMood)
+        setOverallMoodMessage("There is something in here!")
+        
+
+    }
+
     //* OverallMoodLog Modal
+
+    const [isOverallMoodModalVisible, setIsOverallMoodModalVisible] = useState(false)
+
+    function handleOpenOverallMoodModal(): void {
+        console.log("Entered handleOpenMoodModal() ====================")
+        setIsOverallMoodModalVisible(true)
+    }
+    function handleCloseOverallMoodModal(): void {
+        console.log("Entered handleCloseMoodModal() ====================")
+        setIsOverallMoodModalVisible(false)
+    }
 
 
     //* MoodLog
@@ -157,6 +183,11 @@ const MoodTracker: FunctionComponent<MoodTrackerProps> = (props: MoodTrackerProp
                 closeModal={handleCloseMoodModal}
                 handleAddMoodToLog={handleAddMoodToLog}
             />
+            <OverallMoodModal
+                visible={isOverallMoodModalVisible}
+                closeModal={handleCloseOverallMoodModal}
+                handleUpdateOverallMood={handleUpdateOverallMood}
+            />
             {/* //TODO - Create Modal for OverallMood and associated functions, ie: open, close, ect. */}
             <SafeAreaView edges={['top']} children={<TopBar label="Mood Tracker" />} />
             <SafeAreaView mode="padding" style={{ flex: 1 }} edges={['left', 'right']} >
@@ -179,7 +210,7 @@ const MoodTracker: FunctionComponent<MoodTrackerProps> = (props: MoodTrackerProp
                                     text="Overall Mood"
                                     iconName="add"
                                     backgroundColor={generalColors.accent_blue}
-                                    // onPress={handleOpenMoodModal}//TODO set up OVERALL mood modal
+                                    onPress={handleOpenOverallMoodModal}
                                     textStyles={{ fontWeight: "bold" }}
                                 />
                                 // <HeaderThree
@@ -192,7 +223,7 @@ const MoodTracker: FunctionComponent<MoodTrackerProps> = (props: MoodTrackerProp
                                 // />
                                 : 
                                 <HeaderTwo
-                                    text={`${overallMood} - ${overallMoodMessage}`}
+                                    text={`${overallMood.emotion?.emotion} - ${overallMoodMessage}`}
                                 />
                             }
                             {/* </CreateLogButtonContainer> */}
@@ -211,11 +242,10 @@ const MoodTracker: FunctionComponent<MoodTrackerProps> = (props: MoodTrackerProp
                         {moodLog.length ?
                             <DailyEntriesInnerContainer>
                                 {moodLog.map((log) => {
-                                    console.log(`Working on entry ${log.id}`)
-                                    console.log(`dateTracked: ${log.dateTracked}`)
-                                    console.log(`Log: `, log)
-                                    const logText = `${log.emotion?.emotion} - ${datehelpers?.formatDateNamedAndTime(log.dateTracked)}`
-                                    // const logText = `${log.emotion?.emotion} - ${log?.dateTracked}`
+
+                                    const logDate = datehelpers.formatDateNamedAndTime(log.dateTracked)
+                                    
+                                    const logText = `${log.emotion?.emotion} - ${logDate}`
 
                                     return (
                                         <BodyText text={logText} />
